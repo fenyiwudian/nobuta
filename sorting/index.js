@@ -38,7 +38,7 @@ Array.prototype.bubbleSort = function () {
     var temp, i, j;
     for (i = 0; i < this.length - 1; i++) {
         // 从前往后取一个开始冒泡
-        for (var j = 0; j < this.length - 1 - i; i++) {
+        for (j = 0; j < this.length - 1 - i; j++) {
             // 碰到比自己小的
             if (this[j] > this[j + 1]) {
                 // 往上冒
@@ -104,7 +104,7 @@ Array.prototype.shellSort = function () {
         // 对每一组进行直接插入排序
         // 直接插入排序中第一个元素默认为有序，从第二个元素开始
         // 所以对于我们跨步长分组中我们步长索引处的元素（正好是第一组的第二个元素）开始
-        for (i = gap; i < len; i++) {
+        for (i = gap; i < this.length; i++) {
             // 缓存起该位置的元素
             temp = this[i];
             // 跨步和组内前一个元素进行比较
