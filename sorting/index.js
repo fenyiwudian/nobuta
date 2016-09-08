@@ -1,3 +1,7 @@
+var array = [6,3,8,4,9,2,7,5,1];
+
+
+
 /**
  * 选择排序
  * 本质：选择排序
@@ -24,7 +28,9 @@ Array.prototype.selectSort = function(a) {
         this[min] = this[i];
         this[i] = temp;
     }
+    return this;
 }
+document.writeln(`<div>${array.join(' | ')} -> 选择排序 -> ${[...array].selectSort().join(' - ')}</div>`);
 
 /**
  * 冒泡排序
@@ -50,7 +56,10 @@ Array.prototype.bubbleSort = function () {
             // 下一轮让比自己大的家伙冒泡
         }
     }
+    return this;
 }
+document.writeln(`<div>${array.join(' | ')} -> 冒泡排序 -> ${[...array].bubbleSort().join(' - ')}</div>`);
+
 
 /**
  * 直接插入排序
@@ -80,7 +89,10 @@ Array.prototype.insertSort = function () {
         // 移不动了一趟结束，缓存放在最后比较的位置
         this[j + 1] = temp;
     }
+    return this;
 }
+
+document.writeln(`<div>${array.join(' | ')} ->  插入排序 -> ${[...array].insertSort().join(' - ')}</div>`);
 
 /**
  * 希尔排序
@@ -117,4 +129,32 @@ Array.prototype.shellSort = function () {
             this[j + gap] = temp;
         }
     }
+    return this;
 }
+
+
+document.writeln(`<div>${array.join(' | ')} -> 希尔排序 -> ${[...array].shellSort().join(' - ')}</div>`);
+
+
+/**
+ * 归并排序
+ * 本质：归并排序
+ * 分治递归策略，将一个数组分成平分成两个（奇数个则一个多一个少没关系）
+ * 然后对着两个个数组递归调用归并排序，再将排好序的两个合并起来，
+ * 合并的时候那两个数组的第一个元素进行比较，最小的那个脱离原数组并加入到结果数组中，
+ * 直到某个原数组已经没有元素则，将另一个数组的剩余元素加入到结果数组中即可
+ */
+Array.prototype.mergeSort = function() {
+	var merge = function(left, right) {
+		var final = [];
+		while (left.length && right.length)
+			final.push(left[0] <= right[0] ? left.shift() : right.shift());
+		return final.concat(left.concat(right));
+	};
+	var len = this.length;
+	if (len < 2) return this;
+	var mid = len / 2;
+	return merge(this.slice(0, parseInt(mid)).mergeSort(), this.slice(parseInt(mid)).mergeSort());
+};
+
+document.writeln(`<div>${array.join(' | ')} -> 归并排序 -> ${[...array].mergeSort().join(' - ')}</div>`);
