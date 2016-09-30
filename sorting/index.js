@@ -1,4 +1,4 @@
-var array = [6,3,8,4,9,2,7,5,1];
+var array = [6, 3, 8, 4, 9, 2, 7, 5, 1];
 
 
 
@@ -10,15 +10,15 @@ var array = [6,3,8,4,9,2,7,5,1];
  * 每一趟开始时假设以无序部分第一个为最小，然后遍历无序部分得到真正最小的
  * 然后无序第一个和最小的换位，就完成了该趟排序，有序加一位，无序减一位
  */
-Array.prototype.selectSort = function(a) {
+Array.prototype.selectSort = function (a) {
     var temp, min, i, j;
-    for(i = 0; i < this.length - 1; i++){
+    for (i = 0; i < this.length - 1; i++) {
         // 初始假设第一个为最小
         min = i;
         // 尝试往后找更小的
-        for(j = i + 1; j < this.length; j++){
+        for (j = i + 1; j < this.length; j++) {
             // 找到更小的
-            if(this[j] < this[min]){
+            if (this[j] < this[min]) {
                 // 更换最小的
                 min = j;
             }
@@ -144,17 +144,148 @@ document.writeln(`<div>${array.join(' | ')} -> 希尔排序 -> ${[...array].shel
  * 合并的时候那两个数组的第一个元素进行比较，最小的那个脱离原数组并加入到结果数组中，
  * 直到某个原数组已经没有元素则，将另一个数组的剩余元素加入到结果数组中即可
  */
-Array.prototype.mergeSort = function() {
-	var merge = function(left, right) {
-		var final = [];
-		while (left.length && right.length)
-			final.push(left[0] <= right[0] ? left.shift() : right.shift());
-		return final.concat(left.concat(right));
-	};
-	var len = this.length;
-	if (len < 2) return this;
-	var mid = len / 2;
-	return merge(this.slice(0, parseInt(mid)).mergeSort(), this.slice(parseInt(mid)).mergeSort());
+Array.prototype.mergeSort = function () {
+    var merge = function (left, right) {
+        var final = [];
+        while (left.length && right.length)
+            final.push(left[0] <= right[0] ? left.shift() : right.shift());
+        return final.concat(left.concat(right));
+    };
+    var len = this.length;
+    if (len < 2) return this;
+    var mid = len / 2;
+    return merge(this.slice(0, parseInt(mid)).mergeSort(), this.slice(parseInt(mid)).mergeSort());
 };
 
 document.writeln(`<div>${array.join(' | ')} -> 归并排序 -> ${[...array].mergeSort().join(' - ')}</div>`);
+
+
+/**
+ * 鸡尾酒排序
+ * 本质：交换排序
+ * 双向冒泡排序
+ * 每一趟分别冒泡和沉底,直到冒泡有序部分和沉底有序部分相连
+ */
+Array.prototype.cockTailSort = function () {
+    var i, left = 0, right = this.length - 1;
+    var temp;
+    while (left < right) {
+        // 冒泡
+        for (i = left; i < right; i++)
+            if (this[i] > this[i + 1]) {
+                temp = this[i];
+                this[i] = this[i + 1];
+                this[i + 1] = temp;
+            }
+        right--;
+        // 沉底
+        for (i = right; i > left; i--)
+            if (this[i - 1] > this[i]) {
+                temp = this[i];
+                this[i] = this[i - 1];
+                this[i - 1] = temp;
+            }
+        left++;
+    }
+    return this;
+};
+
+document.writeln(`<div>${array.join(' | ')} -> 鸡尾酒排序 -> ${[...array].cockTailSort().join(' - ')}</div>`);
+
+
+/**
+ * 奇偶排序
+ * 本质：交换排序
+ * 一趟排序为：奇偶相邻位置比较交换，然后偶奇位置相邻比较交换，
+ * 在此过程中没有任何位置交换，则代表已经排好序了，
+ * 如果发生了任意位置交换，则认为可能还未排好序，就会重复进行下一趟。
+ */
+Array.prototype.oddEvenSort = function () {
+    var odd_even, i;
+    var temp;
+    // 默认未排好序
+    var sorted = 0;
+    while (!sorted) {
+        // 真心希望走完这一趟我们就排好了
+        sorted = 1;
+        for (odd_even = 0; odd_even < 2; odd_even++)
+            for (i = odd_even; i < this.length - 1; i += 2)
+                if (this[i] > this[i + 1]) {
+                    temp = this[i];
+                    this[i] = this[i + 1];
+                    this[i + 1] = temp;
+                    // 事实是我们发生了位置交换，不能确保我们已经排好了，
+                    // 还得进行下一趟排序
+                    sorted = 0;
+                }
+    }
+    return this;
+};
+
+document.writeln(`<div>${array.join(' | ')} -> 奇偶排序 -> ${[...array].oddEvenSort().join(' - ')}</div>`);
+
+/**
+ * 原地快速排序
+
+ */
+Array.prototype.inPlaceQuickSort = function () {
+
+    return this;
+};
+
+document.writeln(`<div>${array.join(' | ')} -> 原地快速排序 -> ${[...array].inPlaceQuickSort().join(' - ')}</div>`);
+
+
+/**
+ * 非原地快速排序
+ * 找一个元素为基准值，开两块空间：左边，右边
+ * 数组中所有比基准值小的放左边，比基准值大的放右边，
+ * 然后递归助理左边部分和右边部分，然后合并排好序左边和基准值和排好序的右边
+ * 非原地，需要额外较多空间，元素组不变，返回新数组
+ */
+Array.prototype.quickSort = function () {
+    var len = this.length;
+    if (len <= 1)
+        return this.slice(0);
+    var left = [];
+    var right = [];
+    var mid = [this[0]];
+    for (var i = 1; i < len; i++)
+        if (this[i] < mid[0])
+            left.push(this[i]);
+        else
+            right.push(this[i]);
+    return left.quickSort().concat(mid.concat(right.quickSort()));
+};
+
+document.writeln(`<div>${array.join(' | ')} -> 非原地快速排序 -> ${[...array].quickSort().join(' - ')}</div>`);
+
+function quickSort(array) {
+    function sort(prev, numsize) {
+        var nonius = prev;
+        var j = numsize - 1;
+        var flag = array[prev];
+        if ((numsize - prev) > 1) {
+            while (nonius < j) {
+                for (; nonius < j; j--) {
+                    if (array[j] < flag) {
+                        array[nonius++] = array[j];　//a[i] = a[j]; i += 1;
+                        break;
+                    };
+                }
+                for (; nonius < j; nonius++) {
+                    if (array[nonius] > flag) {
+                        array[j--] = array[nonius];
+                        break;
+                    }
+                }
+            }
+            array[nonius] = flag;
+            console.log(array.slice(prev, numsize).join('-'));
+            sort(0, nonius);
+            sort(nonius + 1, numsize);
+        }
+    }
+    sort(0, array.length);
+    return array;
+}

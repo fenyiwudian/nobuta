@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        ul,
+        li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #list {
+            height: 1000px;
+            width: 300px;
+            margin: auto;
+            background: red;
+            overflow: scroll;
+        }
+        
+        .list-item {
+            height: 200px;
+            background: green;
+            margin: 5px;
+            font-size:60px;
+        }
+    </style>
+    <script src='jquery.min.js'></script>
+</head>
+
+<body>
+    <div style='position:absolute;right:0;top:100px;'>
+        <button id='shift'>shift</button>
+        <button id='unshift'>unshift</button>
+        <button id='pop'>pop</button>
+        <button id='push'>push</button>
+    </div>
+    <ul id='list'>
+        <li class="list-item">1</li>
+        <li class="list-item">2</li>
+        <li class="list-item">3</li>
+        <li class="list-item">4</li>
+        <li class="list-item">5</li>
+        <li class="list-item">6</li>
+        <li class="list-item">7</li>
+        <li class="list-item">8</li>
+        <li class="list-item">9</li>
+    </ul>
+    <script>
+        var $shift = $('#shift');
+        var $unshift = $('#unshift');
+        var $pop = $('#pop');
+        var $push = $('#push');
+        var $list = $('#list');
+
+        function random200(){
+            return Math.round(Math.random() * 200) + 200;
+        }
+
+        function shiftItem(){
+            $list.children(':first').remove();
+        }
+
+        function unshiftItem(){
+            var number = parseInt($list.children(':first').text()) - 1;
+            $list.prepend('<li class="list-item" style="height:' + random200() + 'px">' + number + '</li>').children(':eq(1)')[0].scrollIntoView();
+            
+        }
+
+        function popItem(){
+            $list.children(':last').remove();
+        }
+
+        function pushItem(){
+            var number = parseInt($list.children(':last').text()) + 1;
+            $list.append('<li class="list-item" style="height:' + random200() + 'px">' + number + '</li>');
+        }
+
+        $shift.click(shiftItem);
+
+        $unshift.click(unshiftItem);
+
+        $pop.click(popItem);
+
+        $push.click(pushItem);
+
+        function handleScrollEnd(){
+            shiftItem();
+            setTimeout(pushItem)
+        }
+
+        function handleScrollTop(){
+            popItem();
+            setTimeout(unshiftItem)
+        }
+        $list.on('scroll', function(e){
+            if(e.target.scrollTop >= e.target.scrollHeight - e.target.offsetHeight + 15 - 200){
+                handleScrollEnd();
+            }else if(e.target.scrollTop <= 200){
+                handleScrollTop();
+            }
+        })
+    </script>
+</body>
+
+</html>
