@@ -27,7 +27,7 @@
             font-size:60px;
         }
     </style>
-    <script src='jquery.min.js'></script>
+    <script src='../lib/jquery.min.js'></script>
 </head>
 
 <body>
@@ -96,11 +96,11 @@
             setTimeout(unshiftItem)
         }
         $list.on('scroll', function(e){
-            if(e.target.scrollTop >= e.target.scrollHeight - e.target.offsetHeight + 15 - 200){
-                handleScrollEnd();
-            }else if(e.target.scrollTop <= 200){
-                handleScrollTop();
-            }
+            // if(e.target.scrollTop >= e.target.scrollHeight - e.target.offsetHeight + 15 - 200){
+            //     handleScrollEnd();
+            // }else if(e.target.scrollTop <= 200){
+            //     handleScrollTop();
+            // }
         })
     </script>
 </body>
