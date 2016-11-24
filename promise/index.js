@@ -8,19 +8,27 @@
  * then中resolve也和catch一样捕捉错误，但是无法捕捉到和自己一起的resolve中的错误
  * 
  */
+function violentError(){
+    //a = b;
+    throw {error:'true', message:'bad'};
+}
 
 Promise.resolve(1).then(function(res){
     console.log(res);
-    a = b;
+    violentError();
+    // a = b;
     // throw '111';
     // return 2;
 },function(res){console.log('self catch' + res)}).then(function(res){
     console.log(res)
+},function(res){console.log('inner catch' + res); return 'reborn';}).then(function(res){
+    console.log(res);
+}).catch(function(res){
+    console.log('reject:', res);
+    throw 'error from former catch';
+    //return 'after rejected';
 }).then(function(res){
     console.log(res);
 }).catch(function(res){
-    console.log('reject:' + res);
-    return 'after rejected';
-}).then(function(res){
-    console.log(res);
+    console.log('error again', res)
 })
