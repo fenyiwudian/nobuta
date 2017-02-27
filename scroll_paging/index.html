@@ -24,7 +24,7 @@
             height: 200px;
             background: green;
             margin: 5px;
-            font-size:60px;
+            font-size: 60px;
         }
     </style>
     <script src='../lib/jquery.min.js'></script>
@@ -55,25 +55,31 @@
         var $push = $('#push');
         var $list = $('#list');
 
-        function random200(){
+        function random200() {
             return Math.round(Math.random() * 200) + 200;
         }
 
-        function shiftItem(){
+        function shiftItem() {
             $list.children(':first').remove();
         }
 
-        function unshiftItem(){
+        function unshiftItem() {
             var number = parseInt($list.children(':first').text()) - 1;
-            $list.prepend('<li class="list-item" style="height:' + random200() + 'px">' + number + '</li>').children(':eq(1)')[0].scrollIntoView();
-            
+            // 当在顶部插入元素时,有些浏览器不会刷新挤压滚动条,需要我们自己强行重置
+            // 尝试注释掉下面的第二行代码看看效果
+            // 已测试mac上的chrome不会自动挤压
+            // windows上的chrome滚动条未到顶可以自动挤压,已到顶不会自动挤压
+            $list.prepend('<li class="list-item" style="height:' + random200() + 'px">' + number + '</li>')
+                //.children(':eq(1)')[0].scrollIntoView();
+
         }
 
-        function popItem(){
+        function popItem() {
             $list.children(':last').remove();
         }
 
-        function pushItem(){
+        function pushItem() {
+            // 浏览器默认行为,挡在后面加入元素后,会自动刷新滚动条
             var number = parseInt($list.children(':last').text()) + 1;
             $list.append('<li class="list-item" style="height:' + random200() + 'px">' + number + '</li>');
         }
@@ -86,21 +92,22 @@
 
         $push.click(pushItem);
 
-        function handleScrollEnd(){
+        function handleScrollEnd() {
             shiftItem();
             setTimeout(pushItem)
         }
 
-        function handleScrollTop(){
+        function handleScrollTop() {
             popItem();
             setTimeout(unshiftItem)
         }
-        $list.on('scroll', function(e){
-            // if(e.target.scrollTop >= e.target.scrollHeight - e.target.offsetHeight + 15 - 200){
-            //     handleScrollEnd();
-            // }else if(e.target.scrollTop <= 200){
-            //     handleScrollTop();
-            // }
+        $list.on('scroll', function (e) {
+            if (e.target.scrollTop >= e.target.scrollHeight - e.target.offsetHeight + 15 - 200) {
+                handleScrollEnd();
+                
+            } else if (e.target.scrollTop <= 200) {
+                handleScrollTop();
+            }
         })
     </script>
 </body>
