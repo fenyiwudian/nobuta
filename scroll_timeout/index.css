@@ -1,0 +1,7 @@
+div{
+    height: 60px;
+}
+
+div:nth-child(odd){
+    background: pink;
+}
