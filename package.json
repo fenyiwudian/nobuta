@@ -1,0 +1,31 @@
+{
+  "name": "nobuta",
+  "version": "1.0.0",
+  "description": "mingled",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fenyiwudian/nobuta.git"
+  },
+  "keywords": [
+    "test",
+    "tools",
+    "practice"
+  ],
+  "author": "fenyiwudian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fenyiwudian/nobuta/issues"
+  },
+  "homepage": "https://github.com/fenyiwudian/nobuta#readme",
+  "dependencies": {
+    "exceljs": "^0.6.2"
+  },
+  "devDependencies": {}
+}
