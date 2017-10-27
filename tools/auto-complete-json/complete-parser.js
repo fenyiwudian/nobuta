@@ -4,12 +4,13 @@ const fs = require('fs');
 const workbook = new Excel.Workbook();
 
 const srcName = process.argv[2];
-const destFileName = `${srcName}.temp.json`;
+const sheetNum = Number(process.argv[3]) || 1;
+const destFileName = `${srcName}${sheetNum}.temp.json`;
 
 workbook.xlsx.readFile(`/Users/cform/Documents/${srcName}.xlsx`)
     .then(() => {
         const list = [];
-        workbook.getWorksheet(1).eachRow((row, rowNumber) => {
+        workbook.getWorksheet(sheetNum).eachRow((row, rowNumber) => {
             if(rowNumber === 1){
                 return;
             }

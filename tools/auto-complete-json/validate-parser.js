@@ -5,21 +5,19 @@ const workbook = new Excel.Workbook();
 
 const numKeyMap = {
     [1]: 'group',
-    [2]: 'segment',
-    [3]: 'brand',
-    [4]: 'type',
-    [5]: 'officalLowPrice',
-    [6]: 'officalHighPrice',
-    [7]: 'systemLowPrice',
-    [8]: 'sysTemHighPrice',
+    [2]: 'brand',
+    [3]: 'type',
+    [4]: 'systemLowPrice',
+    [5]: 'sysTemHighPrice',
 };
 
 const srcName = process.argv[2];
-const destFileName = `${srcName}.temp.js`;
+const sheetNum = Number(process.argv[3]) || 1;
+const destFileName = `${srcName}${sheetNum}.temp.js`;
 
 workbook.xlsx.readFile(`/Users/cform/Documents/${srcName}.xlsx`)
     .then(() => {
-        const sheet = workbook.getWorksheet(1);
+        const sheet = workbook.getWorksheet(sheetNum);
         const list = [];
         sheet.eachRow((row, rowNumber) => {
             if(rowNumber === 1){
