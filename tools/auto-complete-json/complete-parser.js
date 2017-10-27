@@ -5,9 +5,9 @@ const workbook = new Excel.Workbook();
 
 const srcName = process.argv[2];
 const sheetNum = Number(process.argv[3]) || 1;
-const destFileName = `${srcName}${sheetNum}.temp.json`;
+const destFileName = `local-data/${srcName}${sheetNum}.temp.json`;
 
-workbook.xlsx.readFile(`/Users/cform/Documents/${srcName}.xlsx`)
+workbook.xlsx.readFile(`local-data/${srcName}.xlsx`)
     .then(() => {
         const list = [];
         workbook.getWorksheet(sheetNum).eachRow((row, rowNumber) => {
@@ -16,7 +16,7 @@ workbook.xlsx.readFile(`/Users/cform/Documents/${srcName}.xlsx`)
             }
             const props = [];
             row.eachCell(cell => {
-                props.push(cell.value);
+                props.push(String(cell.value));
             });
             const [name, ...triggers] = props;
             list.push({

@@ -13,9 +13,9 @@ const numKeyMap = {
 
 const srcName = process.argv[2];
 const sheetNum = Number(process.argv[3]) || 1;
-const destFileName = `${srcName}${sheetNum}.temp.js`;
+const destFileName = `local-data/${srcName}${sheetNum}.temp.js`;
 
-workbook.xlsx.readFile(`/Users/cform/Documents/${srcName}.xlsx`)
+workbook.xlsx.readFile(`local-data//${srcName}.xlsx`)
     .then(() => {
         const sheet = workbook.getWorksheet(sheetNum);
         const list = [];
@@ -27,7 +27,7 @@ workbook.xlsx.readFile(`/Users/cform/Documents/${srcName}.xlsx`)
             row.eachCell((cell, number) => {
                 const key = numKeyMap[number];
                 if(key){
-                    car[key] = cell.value;
+                    car[key] = String(cell.value);
                 }
             });
             list.push(car);
