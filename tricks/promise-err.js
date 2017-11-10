@@ -61,16 +61,51 @@ const timeoutSync_1 = () => {
     });
 };
 
+
+
+const fn1 = () => {
+    return new Promise(resolve => {
+        setTimeout(resolve, 100);
+    });
+};
+
+const fn2 = () => {
+    return new Promise(resolve => {
+        setTimeout(function(){
+            a =b;
+            resolve();
+        }, 100);
+    });
+};
+
+const fn3 = () => {
+    return new Promise(resolve => {
+        setTimeout(resolve, 100);
+    });
+};
+
+
 const main = () => {
-    reqeustSync_1().then(res => {
-        console.log('request success', res);
+    // reqeustSync_1().then(res => {
+    //     console.log('request success', res);
+    // }).then(() => {
+    //     return timeoutSync_1().then(res => {
+    //         console.log('timeout success', res);
+    //         return res;
+    //     });
+    // }).catch(err => {
+    //     console.log('outer catch err:', err);
+    // });
+
+
+    fn1().then(() => {
+        return fn2();
     }).then(() => {
-        return timeoutSync_1().then(res => {
-            console.log('timeout success', res);
-            return res;
-        });
+        return fn3();
+    }).then(() => {
+        console.log('ok');
     }).catch(err => {
-        console.log('outer catch err:', err);
+        console.log('catched', err);
     });
 };
 
