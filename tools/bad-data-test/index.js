@@ -105,7 +105,7 @@ const postOne = () => {
         console.log('count: ', currentIndex);
         const data = {
             age, locate, car_brand, car_type, six, three_1, three_2, three_3,
-            survey_id: '5d91177a-2d70-4dc5-bc47-111111111111'
+            survey_id: '5d91177a-2d70-4dc5-bc47-222222222222'
         };
         validate(data, flowId).then(valid => {
             currentIndex++;
@@ -136,7 +136,20 @@ const postOne = () => {
 
 
 const doWithPlain = () => {
-    const data = fs.readFileSync(`./local-data/${file}.csv`).toString();
+    let data = fs.readFileSync(`./local-data/${file}.csv`).toString();
+    let first = true;
+    // 清除无效的用户输入的\n
+    data = data.replace(/\n(?!\w{8}(?:-\w{4}){3}-\w{12})/g, function(){
+        if(first){
+            first = false;
+            return arguments[0];
+        }else{
+            [].pop.call(arguments);
+            console.log(arguments);
+            return '';
+        }
+    });
+
     rows = data.split('\n').map(line => {
         return line.split(',');
     });
