@@ -6,43 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src='../../lib/jquery.min.js'></script>
+    <script src='xss.js'></script>
+    <style>
+        @keyframes red_to_yellow{
+            from {background: red}
+            to {background: yellow}
+        }
+
+        .red_to_yellow_one_time{
+            animation: red_to_yellow 5s;
+        }
+
+        .red_to_yellow_loop{
+            animation: red_to_yellow 2s; 
+            animation-iteration-count: 5;
+        }
+
+    </style>
 </head>
 
 <body>
-    <textarea id="textarea" style="width:400px; height:400px"></textarea>
-    <button id='submit_direct'>直接提交</button>
-    <button id='submit_filter'>过滤提交</button>
-    <div id="result">
-    </div>
-    <script>
-
-        var removeXss = function(node){
-            var count = 1;
-            node.removeAttribute('onclick');
-            node.removeAttribute('src');
-            for(var i = 0; i < node.children.length; i++){
-                count += removeXss(node.children[i])
-            }
-            return count;
-        }
-
-        var filterXss = function(text){
-            var div = document.createElement('div');
-            div.innerHTML = text;
-            console.log(removeXss(div) + ' nodes');
-            return div.innerHTML;
-        }
-        var textarea = document.getElementById('textarea');
-        var submit_direct = document.getElementById('submit_direct');
-        var submit_filter = document.getElementById('submit_filter');
-        var result = document.getElementById('result');
-        submit_direct.onclick = function () {
-            result.innerHTML = textarea.value;
-        }
-        submit_filter.onclick = function(){
-            result.innerHTML = filterXss(textarea.value);
-        }
-    </script>
+    <div id="xss"></div>;
 </body>
 
 </html>
