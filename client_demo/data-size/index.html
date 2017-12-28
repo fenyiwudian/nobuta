@@ -6,30 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+        #data-base,
         #data-table{
-            width: 100px;
+            width: 1200px;
             margin: 40px auto;
         }
-
+        #data-base > div,
         #data-table > div{
             line-height: 40px;
             height: 40px;
             border-bottom: 1px solid black;
         }
+        #data-base > div:first-child,
         #data-table > div:first-child{
             height: 40px;
             border-top: 1px solid black;
         }
+        #data-base > div > div,
         #data-table > div > div{
             display: inline-block;
             width: 160px;
             text-align: center;
             border-right: 1px solid black;
         }
+        #data-base > div > div:first-child,
         #data-table > div > div:first-child{
             border-left: 1px solid black;
         }
-
+        #data-base > div > div:nth-child(2),
         #data-table > div > div:nth-child(2){
             width: 350px;
             border-left: 1px solid black;
@@ -40,6 +44,16 @@
     <script src='index.js'></script>
 </head>
 <body>
+    <div id='data-base'>
+        <div>
+            <div>数据库名</div>
+            <div>表数量</div>
+            <div>数据大小</div>
+            <div>索引大小</div>
+            <div>碎片大小</div>
+            <div>总大小</div>
+        </div>
+    </div>
     <div id='data-table'>
         <div>
             <div>数据库名</div>
