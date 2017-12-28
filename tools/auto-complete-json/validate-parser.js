@@ -4,37 +4,39 @@ const fs = require('fs');
 const workbook = new Excel.Workbook();
 
 const numKeyMap = {
-    [1]: 'group',
-    [2]: 'brand',
-    [3]: 'type',
-    [4]: 'systemLowPrice',
-    [5]: 'sysTemHighPrice',
+    [1]: 'b',
+    [2]: 'group',
+    [3]: 'brand',
+    [4]: 'type',
+    [5]: 'LP',
+    [6]: 'HP',
 };
 
 const srcName = process.argv[2];
-const sheetNum = Number(process.argv[3]) || 1;
-const destFileName = `local-data/${srcName}${sheetNum}.temp.js`;
+const destFileName = `local-data/${srcName}.temp.js`;
 
-workbook.xlsx.readFile(`local-data//${srcName}.xlsx`)
+workbook.xlsx.readFile(`local-data/${srcName}.xlsx`)
     .then(() => {
-        const sheet = workbook.getWorksheet(sheetNum);
+        const sheet = workbook.getWorksheet(1);
         const list = [];
         sheet.eachRow((row, rowNumber) => {
-            if(rowNumber === 1){
+            if (rowNumber === 1) {
                 return;
             }
             const car = {};
             row.eachCell((cell, number) => {
                 const key = numKeyMap[number];
-                if(key){
+                if (key) {
                     car[key] = String(cell.value);
                 }
             });
             list.push(car);
         });
-        const str = `module.exports = ${JSON.stringify(list).replace(/"/g, '\'')};`;
+        const json = JSON.stringify(list)
+            .replace(/"(b|group|brand|type|LP|HP)"/g, '$1');
+        const str = `module.exports = ${json};`;
         fs.writeFile(destFileName, str, (err) => {
-            if(!err){
+            if (!err) {
                 console.log(`${destFileName} generated`);
             }
         });
