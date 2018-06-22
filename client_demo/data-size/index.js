@@ -1,5 +1,6 @@
 $(function () {
-
+    // 使用下面的sql语句可以提取出元数据
+    // select table_schema, table_name, data_length,index_length,data_free from information_schema.tables limit 100000
     var split = function (number) {
         var arr = Math.round(number).toString().split('');
         var arr2 = [];
