@@ -23,7 +23,7 @@
     <script src="https://rawgithub.com/ajaxorg/ace-builds/master/src/ace.js"></script>
     <script src="https://rawgithub.com/ajaxorg/ace-builds/master/src/ext-emmet.js"></script>
     <script src="https://rawgithub.com/nightwing/emmet-core/master/emmet.js"></script>
-    <script src='https://cdn.rawgit.com/less/less.js/be048e77/dist/less.min.js'></script>
+    <script src='https://cdn.rawgit.com/less/less.js/be048e77/dist/less.js'></script>
 </head>
 
 <body>
@@ -50,7 +50,10 @@
             editor.session.setMode('ace/mode/' + e.target.value);
         }
         editor.on('change', function(){
-            document.getElementById('raw').value = editor.getValue();
+            less.render(editor.getValue()).then(function(result){
+                document.getElementById('raw').value = result.css;
+            })
+            
         })
     </script>
 </body>
