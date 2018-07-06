@@ -11,7 +11,7 @@ workbook.xlsx.readFile(`local-data/${srcName}.xlsx`)
     .then(() => {
         const list = [];
         workbook.getWorksheet(sheetNum).eachRow((row, rowNumber) => {
-            if(rowNumber === 1){
+            if (rowNumber === 1) {
                 return;
             }
             const props = [];
@@ -24,7 +24,7 @@ workbook.xlsx.readFile(`local-data/${srcName}.xlsx`)
             });
         });
         fs.writeFile(destFileName, JSON.stringify(list), (err) => {
-            if(!err){
+            if (!err) {
                 console.log(`${destFileName} generated`);
             }
         });

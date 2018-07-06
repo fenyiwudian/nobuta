@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0/dist/ua-parser.min.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>userAgent检测：</h1>
+  <div>通过分析userAgent可以得到客户端的一些信息：如操作系统信息，浏览器信息，设备信息等</div>
+  <div id='info'></div>
+  <script>
+    var rs = UAParser();
+    var text = `  
+        <h3>bowser:</h3>
+        <div>major:${rs.browser.major}</div>
+        <div>name:${rs.browser.name}</div>
+        <div>version:${rs.browser.version}</div>
+        <h3>cpu:</h3>
+        <div>architecture:${rs.cpu.architecture}</div>
+        <h3>device:</h3>
+        <div>model:${rs.device.model}</div>
+        <div>type:${rs.device.type}</div>
+        <div>vendor:${rs.device.vendor}</div>
+        <h3>engine:</h3>
+        <div>name:${rs.engine.name}</div>
+        <div>version:${rs.engine.version}</div>
+        <h3>os:</h3>
+        <div>name:${rs.os.name}</div>
+        <div>version:${rs.os.version}</div>
+        <h3>ua:${rs.ua}</h3>
+        `
+  document.getElementById('info').innerHTML = text;
+  </script>
+</body>
+
+</html>
