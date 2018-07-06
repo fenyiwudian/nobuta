@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"ace@https://github.com/ajaxorg/ace":
+  version "1.3.3"
+  resolved "https://github.com/ajaxorg/ace#f4051ee2305d4b1c7c19704f4a9bf51b8c636a2c"
+
 archiver-utils@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/archiver-utils/-/archiver-utils-1.3.0.tgz#e50b4c09c70bf3d680e32ff1b7994e9f9d895174"
@@ -80,6 +84,10 @@ buffers@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/buffers/-/buffers-0.1.1.tgz#b24579c3bed4d6d396aeee6d9a8ae7f5482ab7bb"
 
+caniuse-db@^1.0.30000161:
+  version "1.0.30000864"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000864.tgz#35a4b2325a8d4553a46b516dbc233bf391d75555"
+
 chainsaw@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/chainsaw/-/chainsaw-0.1.0.tgz#5eab50b28afe58074d0d58291388828b5e5fbc98"
@@ -129,6 +137,18 @@ date-extended@~0.0.3:
 declare.js@~0.0.4:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/declare.js/-/declare.js-0.0.8.tgz#0478adff9564c004f51df73d8bc134019d28dcde"
+
+"emmet-codemirror@https://github.com/emmetio/codemirror":
+  version "1.2.5"
+  resolved "https://github.com/emmetio/codemirror#7da965f3297389f7f21f3ef847c0614d232beb5e"
+  dependencies:
+    emmet "^1.3.0"
+
+emmet@^1.3.0:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/emmet/-/emmet-1.6.3.tgz#fe13d774eee332fe4bf6c0ac8cb2d68616ea50c1"
+  dependencies:
+    caniuse-db "^1.0.30000161"
 
 encoding@^0.1.12:
   version "0.1.12"
