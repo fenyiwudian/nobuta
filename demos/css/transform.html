@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            background: url(./a.jpg) no-repeat fixed center center  / cover;
+        }
+        ul{
+            margin: 0;
+            padding:0;
+        }
+        .aaa{
+            width: 200px;
+            height: 100px;
+            background: red;    
+            margin: 100px;
+        }
+        .bbb{
+            width: 100px;
+            height: 200px;
+            background: red;
+            margin: 100px;
+        }
+        .rotate{
+            width: 200px;
+            height: 100px;
+            background: linear-gradient(red,green);
+            margin:100px;
+        }
+        .plain{
+            transform: rotate(100deg);
+        }   
+
+        .x{
+            transform: rotateX(100deg);
+        }
+
+        .y{
+            transform: rotateY(100deg);
+        }
+
+        .z{
+            transform: rotateZ(100deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="aaa"></div>
+    <div class="bbb"></div>
+    <div class="rotate plain"></div>
+    <div class="rotate x"></div>
+    <div class="rotate y"></div>
+    <div class="rotate z"></div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+</body>
+</html>
