@@ -1,7 +1,7 @@
 const pdf = require('pdfreader');
 const rx = require('recursive-readdir-sync');
 
-const files = rx('local-data/paper');
+const files = [rx('local-data/paper')[0]];
 
 let fileCount = files.length;
 
@@ -13,21 +13,21 @@ const receive = (item) => {
         console.log('print');
         print();
     }
-}
+};
 
 const print = () => {
     let text = '';
-    text += 'code        price       prices \n'
+    text += 'code        price       prices \n';
     let total = 0;
     list.forEach(item => {
-        text += item.code + '        ' + item.price + '       ' + item.prices.join(',') + '      ' + item.name + '\n'
+        text += item.code + '        ' + item.price + '       ' + item.prices.join(',') + '      ' + item.name + '\n';
         total += item.price;
     });
 
     text += `total count: ${list.length} total price: ${total}`;
 
     console.log(text);
-}
+};
 
 files.forEach(file => {
     if (!file.endsWith('.pdf')) {
@@ -49,7 +49,8 @@ files.forEach(file => {
             } else if (item.text.startsWith('¥')) {
                 prices.push(Number(item.text.substr(1)));
             }
+            console.log(item.text, item.x, item.y);
         }
     });
-})
+});
 
