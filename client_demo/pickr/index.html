@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='pickr.js'></script>
+    <link rel="stylesheet" href="pickr.css">
+    <style>
+        .haha .box{
+            width: 30px;
+            height: 30px;
+            margin: 20px;
+        }
+        #red{
+            background: red;
+        }
+
+        #blue{
+            background: blue;
+        }
+
+        #green{
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="haha">
+            <div id="picker" class="box"></div>
+            <div id='red' class="box"></div>
+            <div id='blue' class="box"></div>
+            <div id='green' class="box"></div>
+        </div>
+    </div>
+    <script>
+        var picker = Pickr.create({
+            el: '#picker',
+            components: {
+                preview: true,
+                opacity: true,
+                hue: true,
+                interaction: {
+                    hex: true,
+                    rgba: true,
+                    hsva: true,
+                    input: true,
+                    clear: true,
+                    save: true
+                }
+            },
+            onChange: function(hsva){
+                console.log(hsva.toRGBA().toString());
+            }
+            
+        })
+        document.getElementById('red').addEventListener('click', function(){
+            picker.setColor('rgba(255, 255, 0, 1.0)')
+            picker.show();
+        })
+        document.getElementById('blue').addEventListener('click', function(){
+            picker.setColor('#0FFFF0')
+            picker.show();
+        })
+        document.getElementById('green').addEventListener('click', function(){
+            picker.setColor('#F0F0F0')
+            picker.show();
+        })
+    </script>
+</body>
+
+</html>
