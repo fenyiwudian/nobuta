@@ -1,0 +1,69 @@
+<img id='origin-image' src="" alt="origin-image">
+<img src="" alt="origin-base64-image" id="origin-base64-image">
+<img src="" alt="compressed-base64-image" id="compressed-base64-image">
+
+<div id="origin-div">origin-div</div>
+<div id="origin-base64-div">origin-base64-div</div>
+<div id="compressed-base64-div">compressed-base64-div</div>
+
+<style>
+
+  div {
+    min-width: 800px;
+    min-height: 800px;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+</style>
+<canvas></canvas>
+
+<script>
+  const url = './home-page-background-all.jpg';
+  const canvas = document.querySelector('canvas');
+  const originImg = document.querySelector('#origin-image');
+  const originBase64Img = document.querySelector('#origin-base64-image');
+  const compressedBase64Img = document.querySelector('#compressed-base64-image');
+  const originDiv = document.querySelector('#origin-div');
+  const originBase64Div = document.querySelector('#origin-base64-div');
+  const compressedBase64Div = document.querySelector('#compressed-base64-div');
+
+  originDiv.style.backgroundImage = `url(${url})`;
+
+  originImg.onload = () => {
+    const originHeight = originImg.naturalHeight;
+    const originWidth = originImg.naturalWidth;
+    const ratio = originHeight / originWidth;
+    let compressHeight = 0;
+    let compressWidth = 0;
+    if (originHeight > originWidth) {
+      compressHeight = 100;
+      compressWidth = 100 / ratio;
+    } else {
+      compressWidth = 100;
+      compressHeight = 100 * ratio;
+    }
+    canvas.width = originWidth;
+    canvas.height = originHeight
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(originImg, 0, 0, originWidth, originHeight, 0, 0, originWidth, originHeight);
+
+    const originBase64 = canvas.toDataURL();
+
+    originBase64Img.src = originBase64;
+    originBase64Div.style.backgroundImage = `url(${originBase64})`;
+    console.log(originBase64.length);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.width = compressWidth;
+    canvas.height = compressHeight;
+
+    ctx.drawImage(originImg, 0, 0, originWidth, originHeight, 0, 0, compressWidth, compressHeight);
+
+    const base64 = canvas.toDataURL();
+    console.log(base64.length);
+    compressedBase64Img.src = base64;
+    compressedBase64Div.style.backgroundImage = `url(${base64})`;
+  }
+
+  originImg.src = url;
+
+</script>

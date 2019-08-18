@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/fenyiwudian/nobuta#readme",
   "dependencies": {
+    "choice-form-editor": "^1.0.0",
     "ecstatic": "^3.2.1",
     "encoding": "^0.1.12",
     "exceljs": "^0.6.2",

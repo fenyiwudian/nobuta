@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file">
+    <script>
+        const input = document.querySelector('input');
+        input.onchange = function () {
+            const reader = new FileReader();
+            reader.onload = () => {
+                console.log(reader.result);
+                console.log(encode(reader.result));
+            }
+            reader.readAsText(input.files[0]);
+
+        };
+    </script>
+    <div contenteditable="true"></div>
+    <div contenteditable="true"></div>
+    <div contenteditable="true"></div>
+    <div contenteditable="true"></div>
+    <input type="text">
+    <input type="text">
+    <input type="text">
+</body>
+
+</html>
