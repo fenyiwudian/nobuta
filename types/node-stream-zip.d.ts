@@ -21,7 +21,7 @@ interface NodeStreamZip {
     on(name: 'ready' | 'extract', callback: () => void): void;
     entries(): NSZEntry[];
     entry(name: string): NSZEntry;
-    stream(entry: NSZEntry, cb: (err: ErrorEvent, stm: ReadableStream) => void): void;
-    entryDataSync(entry: NSZEntry): any;
+    stream(entry: string, cb: (err: ErrorEvent, stm: any) => void): void;
+    entryDataSync(entry: string): any;
     close(): void;
 }
