@@ -7,16 +7,22 @@ input.onchange = () => {
         zip.forEach((path, item) => {
             if (item.name === 'word/document.xml') {
                 item.async('text').then(rs => {
-                    const match = rs.match(/<w:t>.+?<\/w:t>/g);
-                    if (match) {
-                        const lines = match.map(item => {
-                            return item.substring(5, item.length - 7);
-                        });
-                        console.log(lines.join('\n'));
-                    }
+                    console.log(rs);
                 });
             }
         });
     });
+};
 
+const wait = () => {
+    return new Promise(resolve => {
+        setTimeout(resolve, 2000);
+    });
+};
+
+document.querySelector('button').onclick = async function () {
+    const start = Date.now();
+    console.log('start');
+    await wait();
+    console.log('end, cost: ', Date.now() - start);
 };
