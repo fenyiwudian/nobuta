@@ -52,7 +52,7 @@ const fn1 = () => {
 const fn2 = () => {
     return new Promise(resolve => {
         // c = dd;
-        setTimeout(function(){
+        setTimeout(function () {
             // a =b;
             resolve();
         }, 100);
@@ -79,8 +79,41 @@ const main = () => {
 };
 
 window.onerror = (err) => {
-    console.log('global',err);
+    console.log('global', err);
 };
 
 
 main();
+
+
+
+// 按照标准then中的回调虽然是异步,但是和setTimout的异步不同,then的异步是微任务,setTimeout的异步是宏任务
+// 微任务会在宏任务之前执行
+// 有些的promise-polyfill是用setTimeout实现的then异步所有导致它们的then异步也变成了宏任务.
+// 这也是没办法的事情,因为老的浏览器都不支持以javascript编程的方式是创建一个微任务,
+// 所有使用polyfill的promise和使用原生的promise会有一些不同
+
+function testPromise(PromiseClass) {
+    console.log('test');
+    setTimeout(() => {
+        console.log(0);
+    });
+    console.log(1);
+
+    new PromiseClass((resolve) => {
+        console.log(2);
+        resolve();
+    }).then(() => {
+        console.log(3);
+    }).then(() => {
+        console.log(4);
+    });
+    console.log(5);
+}
+// 使用原生输入,输出顺序1 2 5 3 4 0
+testPromise(Promise);
+// 使用ES6promise的polyfill要看情况,如果浏览器支持MutationObserver或MessageChannel
+// 则会使用这两个机制设置异步的微任务,就会输出1 2 5 3 4 0
+// 否则只能使用setTimeout设置异步宏任务,就会输出1 2 3 0 3 4
+testPromise(window.ES6Promise);
+// 
