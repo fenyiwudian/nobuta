@@ -14,11 +14,19 @@ input.onchange = () => {
     });
 };
 
-const wait = (number = 2000) => {
+const wait = (number) => {
+    if(number === 0){
+        return Promise.resolve();
+    }
+    if(number < 0){
+        return Promise.reject();
+    }
+    // return Promise.resolve();
     return new Promise(resolve => {
-        if (number < 0) {
-            throw 'error time';
-        }
+        // resolve();
+        // if (number < 0) {
+        //     throw 'error time';
+        // }
         setTimeout(resolve, 2000);
     });
 };
