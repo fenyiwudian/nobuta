@@ -1,5 +1,5 @@
 
-const svgContainer = document.querySelector('svg');
+const container = document.querySelector('#container');
 const path = document.querySelector('#my-path');
 
 
@@ -25,7 +25,7 @@ const getPathDParts = () => {
 const updateAssistPoint = (parts = getPathDParts()) => {
     parts.forEach((part, idx) => {
         const id = [part.c, idx].join('_');
-        let rect = svgContainer.querySelector('#' + id);
+        let rect = container.querySelector('#' + id);
         if (!rect) {
             rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             rect.setAttribute('id', id);
@@ -34,7 +34,8 @@ const updateAssistPoint = (parts = getPathDParts()) => {
             rect.setAttribute('stroke', 'black');
             rect.setAttribute('fill', 'transparent');
             rect.setAttribute('stroke-width', '2');
-            svgContainer.appendChild(rect);
+            rect.addEventListener('mousedown', handleRectMouseDown);
+            container.appendChild(rect);
         }
         rect.setAttribute('x', part.x - 2);
         rect.setAttribute('y', part.y - 2);
@@ -44,15 +45,43 @@ const updateAssistPoint = (parts = getPathDParts()) => {
 
 let prevX = 0;
 let prevY = 0;
-const move = (e) => {
+
+const isSamePart = (a, b) => {
+    return JSON.stringify(a) === JSON.stringify(b);
+};
+
+
+const moveAll = (e) => {
+    const deltaX = e.pageX - prevX;
+    const deltaY = e.pageY - prevY;
+    const transform = container.getAttribute('transform');
+    const match = transform.match(/-?\d+/g);
+    const x = Number(match[0]);
+    const y = Number(match[1]);
+    const newTransform = `translate(${x + deltaX},${y + deltaY})`;
+    container.setAttribute('transform', newTransform);
+    prevX += deltaX;
+    prevY += deltaY;
+
+};
+
+const movePart = (e) => {
     const parts = getPathDParts();
+    const target = currentRectTarget;
+    const partX = Number(target.getAttribute('x'));
+    const partY = Number(target.getAttribute('y'));
+    const targetPart = parts.find(tmp => {
+        return tmp.x - 2 === partX && tmp.y - 2 === partY;
+    });
     const deltaX = e.pageX - prevX;
     const deltaY = e.pageY - prevY;
     prevX += deltaX;
     prevY += deltaY;
     const newD = parts.reduce((rs, part) => {
-        part.x += deltaX;
-        part.y += deltaY;
+        if (!targetPart || isSamePart(targetPart, part)) {
+            part.x += deltaX;
+            part.y += deltaY;
+        }
         if (rs) {
             rs += ' ';
         }
@@ -63,20 +92,32 @@ const move = (e) => {
     updateAssistPoint();
 };
 
+let currentRectTarget = null;
+
+const handleRectMouseDown = (e) => {
+    currentRectTarget = e.target;
+    prevX = e.pageX;
+    prevY = e.pageY;
+    document.addEventListener('mousemove', movePart);
+};
+
+
 path.addEventListener('mousedown', (e) => {
     prevX = e.pageX;
     prevY = e.pageY;
-    document.addEventListener('mousemove', move);
+    document.addEventListener('mousemove', moveAll);
 });
 
 document.addEventListener('mouseup', () => {
-    document.removeEventListener('mousemove', move);
+    document.removeEventListener('mousemove', moveAll);
+    document.removeEventListener('mousemove', movePart);
+    currentRectTarget = null;
 });
 
 
 
-path.addEventListener('click', function () {
-    console.log('click');
+path.addEventListener('click', function (e) {
+    console.log('click', e.pageX, e.pageY);
 });
 
 updateAssistPoint();
