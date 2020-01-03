@@ -1,5 +1,7 @@
 
 const container = document.querySelector('#container');
+const assistPoints = document.querySelector('#assist-points');
+const assistLines = document.querySelector('#assist-lines');
 const path = document.querySelector('#my-path');
 
 
@@ -22,23 +24,52 @@ const getPathDParts = () => {
     return parts;
 };
 
-const updateAssistPoint = (parts = getPathDParts()) => {
+const addPoint = (e) => {
+    const parts = getPathDParts();
+    const index = Number(e.target.getAttribute('id').split('_')[1]);
+    const { x, y } = getTransform();
+    const newPart = {
+        c: 'L',
+        x: e.pageX - x,
+        y: e.pageY - y,
+    };
+    parts.splice(index + 1, 0, newPart);
+    updateMainPath(parts);
+    updateAssist(parts);
+};
+
+const updateAssist = (parts = getPathDParts()) => {
+    const lines = [];
     parts.forEach((part, idx) => {
+        const next = parts[idx + 1] || parts[0];
+        lines.push({ from: part, to: next });
         const id = [part.c, idx].join('_');
-        let rect = container.querySelector('#' + id);
+        let rect = assistPoints.querySelector('#' + id);
         if (!rect) {
             rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             rect.setAttribute('id', id);
-            rect.setAttribute('width', 4);
-            rect.setAttribute('height', 4);
-            rect.setAttribute('stroke', 'black');
-            rect.setAttribute('fill', 'transparent');
-            rect.setAttribute('stroke-width', '2');
+            rect.setAttribute('width', 6);
+            rect.setAttribute('height', 6);
             rect.addEventListener('mousedown', handleRectMouseDown);
-            container.appendChild(rect);
+            assistPoints.appendChild(rect);
         }
-        rect.setAttribute('x', part.x - 2);
-        rect.setAttribute('y', part.y - 2);
+        rect.setAttribute('x', part.x - 3);
+        rect.setAttribute('y', part.y - 3);
+    });
+
+    lines.forEach((line, index) => {
+        const { from, to } = line;
+        const id = from.c + to.c + '_' + index;
+        let linePath = assistLines.querySelector('#' + id);
+        if (!linePath) {
+            linePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            linePath.setAttribute('stroke', 'transparent');
+            linePath.setAttribute('stroke-width', '4');
+            linePath.setAttribute('id', id);
+            linePath.addEventListener('click', addPoint);
+            assistLines.appendChild(linePath);
+        }
+        linePath.setAttribute('d', `M${from.x} ${from.y} L${to.x} ${to.y} Z`);
     });
 };
 
@@ -50,38 +81,27 @@ const isSamePart = (a, b) => {
     return JSON.stringify(a) === JSON.stringify(b);
 };
 
-
-const moveAll = (e) => {
-    const deltaX = e.pageX - prevX;
-    const deltaY = e.pageY - prevY;
+const getTransform = () => {
     const transform = container.getAttribute('transform');
     const match = transform.match(/-?\d+/g);
     const x = Number(match[0]);
     const y = Number(match[1]);
+    return { x, y };
+};
+
+
+const moveAll = (e) => {
+    const deltaX = e.pageX - prevX;
+    const deltaY = e.pageY - prevY;
+    const { x, y } = getTransform();
     const newTransform = `translate(${x + deltaX},${y + deltaY})`;
     container.setAttribute('transform', newTransform);
     prevX += deltaX;
     prevY += deltaY;
-
 };
 
-const movePart = (e) => {
-    const parts = getPathDParts();
-    const target = currentRectTarget;
-    const partX = Number(target.getAttribute('x'));
-    const partY = Number(target.getAttribute('y'));
-    const targetPart = parts.find(tmp => {
-        return tmp.x - 2 === partX && tmp.y - 2 === partY;
-    });
-    const deltaX = e.pageX - prevX;
-    const deltaY = e.pageY - prevY;
-    prevX += deltaX;
-    prevY += deltaY;
+const updateMainPath = (parts) => {
     const newD = parts.reduce((rs, part) => {
-        if (!targetPart || isSamePart(targetPart, part)) {
-            part.x += deltaX;
-            part.y += deltaY;
-        }
         if (rs) {
             rs += ' ';
         }
@@ -89,7 +109,31 @@ const movePart = (e) => {
         return rs;
     }, '') + ' Z';
     path.setAttribute('d', newD);
-    updateAssistPoint();
+};
+
+
+const movePart = (e) => {
+    const parts = getPathDParts();
+    const target = currentRectTarget;
+    const partX = Number(target.getAttribute('x'));
+    const partY = Number(target.getAttribute('y'));
+    const targetPart = parts.find(tmp => {
+        return tmp.x - 3 === partX && tmp.y - 3 === partY;
+    });
+    const deltaX = e.pageX - prevX;
+    const deltaY = e.pageY - prevY;
+    prevX += deltaX;
+    prevY += deltaY;
+    if (targetPart) {
+        for (const temp of parts) {
+            if (isSamePart(temp, targetPart)) {
+                temp.x += deltaX;
+                temp.y += deltaY;
+            }
+        }
+    }
+    updateMainPath(parts);
+    updateAssist(parts);
 };
 
 let currentRectTarget = null;
@@ -120,4 +164,4 @@ path.addEventListener('click', function (e) {
     console.log('click', e.pageX, e.pageY);
 });
 
-updateAssistPoint();
+updateAssist();
