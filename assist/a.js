@@ -98,14 +98,14 @@ ASSIST.generateNodesFromText = (text) => {
         ;
     const nodeCells = nodeLines.map(line => line.split('\t'));
     const nodeJsonList = [];
-    const tempJson = null;
+    let tempJson = null;
     nodeCells.forEach(line => {
         const name = line[0];
         if (name) {
             if (tempJson) {
                 nodeJsonList.push(tempJson);
             }
-            const tempJson = {
+            tempJson = {
                 questionText: line[1],
                 nodeName: name,
                 options: [],
