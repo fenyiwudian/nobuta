@@ -93,7 +93,7 @@ ASSIST.generateGroupNameFromText = function (text) {
 /**
  * 快速从文本生成节点
  */
-window.generateNodesFromText = (text) => {
+ASSIST.generateNodesFromText = (text) => {
     const nodeLines = text.split('\n').filter(i => !!i)
         ;
     const nodeCells = nodeLines.map(line => line.split('\t'));
