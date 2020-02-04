@@ -13,7 +13,7 @@ ASSIST.mapCity = function (text) {
         if (tierMatch) {
             obj.tier = tierMatch[1];
         }
-        const nameMatch = str.match(/[\u4e00-\u9fa5（）\/]+/);
+        const nameMatch = str.match(/[\u4e00-\u9fa5（）/]+/);
         if (nameMatch) {
             obj.name = nameMatch[0];
         }
@@ -133,4 +133,20 @@ ASSIST.generateNodesFromText = (text) => {
     window.groupRectManager.currentGroup.title = addedNodes[0].nodeName.split('_')[0];
     window.groupRectManager.currentGroup.singlePage = true;
     window.groupRectManager.currentGroup.toggleCollapse();
+};
+
+
+ASSIST.translate = function (text) {
+    const t = (obj, key, value) => {
+        const lang = window.langKit.viceLang;
+        const i18nKey = obj.appendI18nKey(key);
+        window.i18nStore.setValue(value, i18nKey, lang);
+    };
+    const [questionText, ...optionTextList] = text.split('\n');
+
+    const node = window.nodeManager.currentNode;
+    t(node, 'questionText', questionText);
+    window.nodeManager.currentNode.options.forEach((opt, idx) => {
+        t(opt, 'text', optionTextList[idx]);
+    });
 };
