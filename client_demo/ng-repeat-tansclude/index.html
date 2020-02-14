@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src='../lib/angular.js'> </script>
-        <script>
-            angular.module('app', []).controller('MainController',['$scope', function($scope){
-                $scope.model = {
-                    showList: false,
-                    list:[1,2,3,4]
-                }
-            }]).directive('withTransclude', function(){
-                return {
-                    restrict: 'E',
-                    replace: true,
-                    transclude: true,
-                    template:'<div><span>transclude container</span><ng-transclude></ng-transclude></div>',
-                    link:function($scope, $element, attr, ctrl, transclude){
 
-                        // may cause multiple ng-repeat list when you toggle your content by ng-if
-                        //$element.find('ng-transclude').replaceWith(transclude());
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src='../lib/angular.js'> </script>
+  <script>
+    angular.module('app', []).controller('MainController', ['$scope', function ($scope) {
+      $scope.model = {
+        showList: false,
+        list: [1, 2, 3, 4]
+      }
+    }]).directive('withTransclude', function () {
+      return {
+        restrict: 'E',
+        replace: true,
+        transclude: true,
+        template: '<div><span>transclude container</span><ng-transclude></ng-transclude></div>',
+        link: function ($scope, $element, attr, ctrl, transclude) {
+
+          // may cause multiple ng-repeat list when you toggle your content by ng-if
+          //$element.find('ng-transclude').replaceWith(transclude());
 
 
-                        // if you have ng-repeat in your transclude dom,you must transclude dom provided by callback function, 
-                        // unless you may get multiple ng-repeat list when you toggle your content by ng-if
-                        transclude(function(element){
-                            $element.find('ng-transclude').replaceWith(element);
-                        })
-                        
-                    }
-                }
-            })
-        </script>
-    </head>
-    <body ng-app='app' ng-controller="MainController">
-        <button ng-click='model.showList = !model.showList'>toggle show</button>
-        <div ng-if="model.showList">
-            <span>shown</span>
-            <with-transclude>
-                <div>hello</div>
-                <ul>
-                    <li ng-repeat="number in model.list">{{number}}</li>
-                </ul>
-            </with-transclude>
-        </div>
-    </body>
+          // if you have ng-repeat in your transclude dom,you must transclude dom provided by callback function, 
+          // unless you may get multiple ng-repeat list when you toggle your content by ng-if
+          transclude(function (element) {
+            $element.find('ng-transclude').replaceWith(element);
+          })
+
+        }
+      }
+    })
+  </script>
+</head>
+
+<body ng-app='app' ng-controller="MainController">
+  <button ng-click='model.showList = !model.showList'>toggle show</button>
+  <div ng-if="model.showList">
+    <span>shown</span>
+    <with-transclude>
+      <div>hello</div>
+      <ul>
+        <li ng-repeat="number in model.list">{{number}}</li>
+      </ul>
+    </with-transclude>
+  </div>
+</body>
+
 </html>

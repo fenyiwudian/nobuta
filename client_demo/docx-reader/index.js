@@ -1,83 +1,83 @@
 const input = document.querySelector('input');
 
 input.onchange = () => {
-    const file = input.files[0];
+  const file = input.files[0];
 
-    window.JSZip.loadAsync(file).then((zip) => {
-        zip.forEach((path, item) => {
-            if (item.name === 'word/document.xml') {
-                item.async('text').then(rs => {
-                    console.log(rs);
-                });
-            }
+  window.JSZip.loadAsync(file).then((zip) => {
+    zip.forEach((path, item) => {
+      if (item.name === 'word/document.xml') {
+        item.async('text').then(rs => {
+          console.log(rs);
         });
+      }
     });
+  });
 };
 
 const wait = (number) => {
-    if(number === 0){
-        return Promise.resolve();
-    }
-    if(number < 0){
-        return Promise.reject();
-    }
-    // return Promise.resolve();
-    return new Promise(resolve => {
-        // resolve();
-        // if (number < 0) {
-        //     throw 'error time';
-        // }
-        setTimeout(resolve, 2000);
-    });
+  if (number === 0) {
+    return Promise.resolve();
+  }
+  if (number < 0) {
+    return Promise.reject();
+  }
+  // return Promise.resolve();
+  return new Promise(resolve => {
+    // resolve();
+    // if (number < 0) {
+    //     throw 'error time';
+    // }
+    setTimeout(resolve, 2000);
+  });
 };
 
 document.querySelector('button').onclick = async function () {
-    const start = Date.now();
-    console.log('start');
-    await wait();
-    console.log('end, cost: ', Date.now() - start);
+  const start = Date.now();
+  console.log('start');
+  await wait();
+  console.log('end, cost: ', Date.now() - start);
 };
 
 
 const normalFn = () => {
-    console.log('start normal');
+  console.log('start normal');
 
-    wait().then(() => {
-        console.log('end normal');
-    });
-    return 'normal';
+  wait().then(() => {
+    console.log('end normal');
+  });
+  return 'normal';
 };
 
 const asyncFn = async () => {
-    console.log('start async');
-    await wait();
-    console.log('end async');
-    return 'async';
+  console.log('start async');
+  await wait();
+  console.log('end async');
+  return 'async';
 };
 
 const testNormalVsAsync = async () => {
-    const n = normalFn();
-    console.log('normal value:', n);
+  const n = normalFn();
+  console.log('normal value:', n);
 
-    const v = await asyncFn();
-    console.log('async value:', v);
+  const v = await asyncFn();
+  console.log('async value:', v);
 };
 
 testNormalVsAsync();
 
 
 const testDotCatchAndTryCatch = async (number) => {
-    console.log();
-    try {
-        await wait(number);
-        console.log('success with time', number);
-    }
-    catch (err) {
-        console.log('got error with:', err, number);
-        throw err;
-    } finally {
-        console.log('finally');
-    }
+  console.log();
+  try {
+    await wait(number);
+    console.log('success with time', number);
+  }
+  catch (err) {
+    console.log('got error with:', err, number);
+    throw err;
+  } finally {
+    console.log('finally');
+  }
 };
 
 testDotCatchAndTryCatch(100);

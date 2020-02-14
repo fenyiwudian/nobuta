@@ -2,60 +2,62 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        #raw{
-            resize: none;
-            width: 400px;
-            height: 600px;
-        }
-        #code {
-            width: 400px;
-            height: 600px;
-        }
-        .fl{
-            float:left;
-        }
-    </style>
-    <script src="https://rawgithub.com/ajaxorg/ace-builds/master/src/ace.js"></script>
-    <script src="https://rawgithub.com/ajaxorg/ace-builds/master/src/ext-emmet.js"></script>
-    <script src="https://rawgithub.com/nightwing/emmet-core/master/emmet.js"></script>
-    <script src='https://cdn.rawgit.com/less/less.js/be048e77/dist/less.js'></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #raw {
+      resize: none;
+      width: 400px;
+      height: 600px;
+    }
+
+    #code {
+      width: 400px;
+      height: 600px;
+    }
+
+    .fl {
+      float: left;
+    }
+  </style>
+  <script src="https://rawgithub.com/ajaxorg/ace-builds/master/src/ace.js"></script>
+  <script src="https://rawgithub.com/ajaxorg/ace-builds/master/src/ext-emmet.js"></script>
+  <script src="https://rawgithub.com/nightwing/emmet-core/master/emmet.js"></script>
+  <script src='https://cdn.rawgit.com/less/less.js/be048e77/dist/less.js'></script>
 </head>
 
 <body>
-    
-    <textarea class="fl" id='raw'>
+
+  <textarea class="fl" id='raw'>
 
     </textarea>
-    <div class= 'fl' id='code'></div>
-    <div class= 'fl'>
-            <select name="" id="mode">
-                    <option value="less">less</option>
-                    <option value="html">html</option>
-                    <option value="javascript">javascript</option>
-                </select>
-    </div>
+  <div class='fl' id='code'></div>
+  <div class='fl'>
+    <select name="" id="mode">
+      <option value="less">less</option>
+      <option value="html">html</option>
+      <option value="javascript">javascript</option>
+    </select>
+  </div>
 
-    <script>
-        var editor = ace.edit('code');
-        editor.setTheme('ace/theme/dracula');
-        editor.session.setMode('ace/mode/less');
-        var Emmet = require('ace/ext/emmet');
-        editor.setOption('enableEmmet', true);
-        document.getElementById('mode').onchange = function(e){
-            editor.session.setMode('ace/mode/' + e.target.value);
-        }
-        editor.on('change', function(){
-            less.render(editor.getValue()).then(function(result){
-                document.getElementById('raw').value = result.css;
-            })
-            
-        })
-    </script>
+  <script>
+    var editor = ace.edit('code');
+    editor.setTheme('ace/theme/dracula');
+    editor.session.setMode('ace/mode/less');
+    var Emmet = require('ace/ext/emmet');
+    editor.setOption('enableEmmet', true);
+    document.getElementById('mode').onchange = function (e) {
+      editor.session.setMode('ace/mode/' + e.target.value);
+    }
+    editor.on('change', function () {
+      less.render(editor.getValue()).then(function (result) {
+        document.getElementById('raw').value = result.css;
+      })
+
+    })
+  </script>
 </body>
 
 </html>

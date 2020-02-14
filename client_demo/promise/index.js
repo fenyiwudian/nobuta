@@ -44,42 +44,42 @@
 
 
 const fn1 = () => {
-    return new Promise(resolve => {
-        setTimeout(resolve, 100);
-    });
+  return new Promise(resolve => {
+    setTimeout(resolve, 100);
+  });
 };
 
 const fn2 = () => {
-    return new Promise(resolve => {
-        // c = dd;
-        setTimeout(function () {
-            // a =b;
-            resolve();
-        }, 100);
-    });
+  return new Promise(resolve => {
+    // c = dd;
+    setTimeout(function () {
+      // a =b;
+      resolve();
+    }, 100);
+  });
 };
 
 const fn3 = () => {
-    return new Promise(resolve => {
-        setTimeout(resolve, 100);
-    });
+  return new Promise(resolve => {
+    setTimeout(resolve, 100);
+  });
 };
 
 
 const main = () => {
-    fn1().then(() => {
-        return fn2();
-    }).then(() => {
-        return fn3();
-    }).then(() => {
-        console.log('ok');
-    }).catch(err => {
-        console.log('catched by promise', err);
-    });
+  fn1().then(() => {
+    return fn2();
+  }).then(() => {
+    return fn3();
+  }).then(() => {
+    console.log('ok');
+  }).catch(err => {
+    console.log('catched by promise', err);
+  });
 };
 
 window.onerror = (err) => {
-    console.log('global', err);
+  console.log('global', err);
 };
 
 
@@ -94,21 +94,21 @@ main();
 // 所有使用polyfill的promise和使用原生的promise会有一些不同
 
 function testPromise(PromiseClass) {
-    console.log('test');
-    setTimeout(() => {
-        console.log(0);
-    });
-    console.log(1);
+  console.log('test');
+  setTimeout(() => {
+    console.log(0);
+  });
+  console.log(1);
 
-    new PromiseClass((resolve) => {
-        console.log(2);
-        resolve();
-    }).then(() => {
-        console.log(3);
-    }).then(() => {
-        console.log(4);
-    });
-    console.log(5);
+  new PromiseClass((resolve) => {
+    console.log(2);
+    resolve();
+  }).then(() => {
+    console.log(3);
+  }).then(() => {
+    console.log(4);
+  });
+  console.log(5);
 }
 // 使用原生输入,输出顺序1 2 5 3 4 0
 testPromise(Promise);
@@ -116,4 +116,4 @@ testPromise(Promise);
 // 则会使用这两个机制设置异步的微任务,就会输出1 2 5 3 4 0
 // 否则只能使用setTimeout设置异步宏任务,就会输出1 2 3 0 3 4
 testPromise(window.ES6Promise);
-// 
+//

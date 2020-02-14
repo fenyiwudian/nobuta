@@ -1,3 +1,3 @@
 export const hehe = () => {
-    console.log('hehe first'); 
+  console.log('hehe first');
 };

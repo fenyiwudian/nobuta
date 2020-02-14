@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        html, body, iframe{
-            width: 100%;
-            height: 100%;
-            padding: 0;
-            margin: 0;
-            border: 0;
-        }
-        #username,
-        #password,
-        #submit{
-            position: absolute;
-            width: 330px;
-            height: 38px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html,
+    body,
+    iframe {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      border: 0;
+    }
+
+    #username,
+    #password,
+    #submit {
+      position: absolute;
+      width: 330px;
+      height: 38px;
+    }
+  </style>
 </head>
+
 <body>
-    <iframe src="https://www.cform.io/user/#/login/" frameborder="0"></iframe>
-    <input type="text" id="username">
-    <input type="password" id="password">
-    <button id='submit'></button>
-    <script>
-        window.onkeydown = function(e){
-            console.log(e.key);
-        }
-        var username = document.getElementById('username');
-        var password = document.getElementById('password');
-        var submit = ducument.getElementById('submit');
-        
-    </script>
+  <iframe src="https://www.cform.io/user/#/login/" frameborder="0"></iframe>
+  <input type="text" id="username">
+  <input type="password" id="password">
+  <button id='submit'></button>
+  <script>
+    window.onkeydown = function (e) {
+      console.log(e.key);
+    }
+    var username = document.getElementById('username');
+    var password = document.getElementById('password');
+    var submit = ducument.getElementById('submit');
+
+  </script>
 </body>
+
 </html>

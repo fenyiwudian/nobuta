@@ -2,9 +2,9 @@
 // 所以下面的第三句代码当右边的一小节执行问,a的引用指向发生变化时
 // 左边这个a.x进行赋值的时候还是老的内存区域,此时a已经不指向这个区域了
 // 所以x属性并没有赋给a的新内存区域,而是在老的区域,正好b还指向这个区域,所以还能观察到
-var a = {n:1}; 
-var b = a; 
-a.x = a = {n:2}; // 
+var a = { n: 1 };
+var b = a;
+a.x = a = { n: 2 }; // 
 console.log(a.x) // undefined
 console.log(b.x) // {n:2}
 
@@ -13,9 +13,9 @@ console.log(b.x) // {n:2}
  * 所以第三句代码执行完后a的位置虽然变了,
  * 但是第四句执行的时候会重新取a的位置,这时候x值就赋值到了新的区域,而不是老的区域
  */
-var a = {n:1}; 
-var b = a; 
-a = {n:2};
+var a = { n: 1 };
+var b = a;
+a = { n: 2 };
 a.x = a;  // 
 console.log(a.x) // {n:2, x: [Circular]}
 console.log(b.x) // undefined

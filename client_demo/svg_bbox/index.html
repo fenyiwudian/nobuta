@@ -1,80 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>test sample</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="index.css" rel="stylesheet">
-    </head>
-    <style>
-        #first,
-        #second{
-            width: 100px;
-            height: 150px;
-            background: red;
-        }
-        #second{
-            transform: rotate(90deg);
-        }
 
-        #container1,
-        #container2,
-        #container3{
-            margin: 40px;
-        }
+<head>
+  <title>test sample</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="index.css" rel="stylesheet">
+</head>
+<style>
+  #first,
+  #second {
+    width: 100px;
+    height: 150px;
+    background: red;
+  }
 
-        #container2{
-            transform: rotate(90deg);
-        }
+  #second {
+    transform: rotate(90deg);
+  }
 
-        #third{
-            width: 100px;
-            height: 150px;
-            background: red;
-            margin: 20px;
-        }
+  #container1,
+  #container2,
+  #container3 {
+    margin: 40px;
+  }
 
-        #forth{
-            width: 150px;
-            height: 100px;
-            background: red;
-            margin: 20px;
-        }
+  #container2 {
+    transform: rotate(90deg);
+  }
 
-        #fifth{
-            width: 100px;
-            height: 100px;
-            background: red;
-            margin: 20px;
-        }
+  #third {
+    width: 100px;
+    height: 150px;
+    background: red;
+    margin: 20px;
+  }
 
-        #sixth{
-            width: 150px;
-            height: 150px;
-            background: red;
-            margin: 20px;
-        }
-    </style>
-    <body>
-    <div >
-        <div id="container1">
-                <div id="first" onclick="alert(1)"></div>
-                <div id="second" onClick="alert(2)"></div>
-        </div>
+  #forth {
+    width: 150px;
+    height: 100px;
+    background: red;
+    margin: 20px;
+  }
 
-        <div id="container2">
-                <div id="first"></div>
-                <div id="second"></div>
-        </div>
+  #fifth {
+    width: 100px;
+    height: 100px;
+    background: red;
+    margin: 20px;
+  }
 
-        <div id="container3">
-                <div id="third"></div>
-                <div id="forth"></div>
-                <div id="fifth"></div>
-                <div id="sixth"></div>
-        </div>
-        
-        <!-- <script src='https://raw.githubusercontent.com/davidshimjs/qrcodejs/master/qrcode.js'></script>
+  #sixth {
+    width: 150px;
+    height: 150px;
+    background: red;
+    margin: 20px;
+  }
+</style>
+
+<body>
+  <div>
+    <div id="container1">
+      <div id="first" onclick="alert(1)"></div>
+      <div id="second" onClick="alert(2)"></div>
+    </div>
+
+    <div id="container2">
+      <div id="first"></div>
+      <div id="second"></div>
+    </div>
+
+    <div id="container3">
+      <div id="third"></div>
+      <div id="forth"></div>
+      <div id="fifth"></div>
+      <div id="sixth"></div>
+    </div>
+
+    <!-- <script src='https://raw.githubusercontent.com/davidshimjs/qrcodejs/master/qrcode.js'></script>
         <script>
             var div = document.createElement('div');
             QRCode(div, {useSVG:true, text: 'hello'});
@@ -85,5 +88,6 @@
 
             var image = document.createElement('image')
         </script>            -->
-    </body>
+</body>
+
 </html>

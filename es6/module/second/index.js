@@ -1,3 +1,3 @@
 export const haha = () => {
-    console.log('haha second');
+  console.log('haha second');
 };

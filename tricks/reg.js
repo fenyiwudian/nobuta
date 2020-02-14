@@ -3,8 +3,8 @@
 
 var special = /([\\(){}*+.[\]?^|])/g;
 
-var normaToReg = function(key){
-    return key.replace(special, '\\$1');
+var normaToReg = function (key) {
+  return key.replace(special, '\\$1');
 };
 
 var text = '111\\222\\333\\d\\w\\t\\s---dwts{}[](123)(\\d+)';

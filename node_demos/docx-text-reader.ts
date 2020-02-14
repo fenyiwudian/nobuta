@@ -8,38 +8,38 @@ import fs = require('fs');
 
 // 内存解压word文档
 const zip = new nodeStreamZip({
-    file: 'local-data/demo.docx',
-    storeEntries: true,
+  file: 'local-data/demo.docx',
+  storeEntries: true,
 })
 
 // 解压准备好后
 zip.on('ready', () => {
-    let content = '';
-    const chunks: Uint8Array[] = [];
-    // 读取解压出来的文本内容包含文件
-    zip.stream('word/document.xml', (err, stream: fs.ReadStream) => {
-        if (err) {
-            throw err;
-        }
+  let content = '';
+  const chunks: Uint8Array[] = [];
+  // 读取解压出来的文本内容包含文件
+  zip.stream('word/document.xml', (err, stream: fs.ReadStream) => {
+    if (err) {
+      throw err;
+    }
 
-        stream.on('data', (chunk) => {
-            console.log('on data');
-            chunks.push(chunk)
+    stream.on('data', (chunk) => {
+      console.log('on data');
+      chunks.push(chunk)
+    });
+    stream.on('end', () => {
+      content = Buffer.concat(chunks).toString();
+      // 读出来的文本是一个xml，文本内容被包含在<w:t></w:t>标签中，正则表达式抽取。
+      const match = content.match(/<w:t>.+?<\/w:t>/g);
+      if (match) {
+        const lines = match.map(item => {
+          return item.substring(5, item.length - 7);
         });
-        stream.on('end', () => {
-            content = Buffer.concat(chunks).toString();
-            // 读出来的文本是一个xml，文本内容被包含在<w:t></w:t>标签中，正则表达式抽取。
-            const match = content.match(/<w:t>.+?<\/w:t>/g);
-            if (match) {
-                const lines = match.map(item => {
-                    return item.substring(5, item.length - 7);
-                });
-                console.log(lines.join('\n'));
-            }
+        console.log(lines.join('\n'));
+      }
 
-            zip.close();
+      zip.close();
 
-        })
     })
+  })
 
 })

@@ -1,19 +1,19 @@
 var down = false;
-var handler = function(e){
-    if(e.type === 'mousemove' && !down){
-        return;
-    }
-    if(e.type === 'mousedown'){
-        down = true;
-    }
-    if(e.type === 'mouseup'){
-        down = false;
-    }
+var handler = function (e) {
+  if (e.type === 'mousemove' && !down) {
+    return;
+  }
+  if (e.type === 'mousedown') {
+    down = true;
+  }
+  if (e.type === 'mouseup') {
+    down = false;
+  }
 
-    var div = document.createElement('div');
-    div.textContent = e.type;
-    document.body.appendChild(div);
-    
+  var div = document.createElement('div');
+  div.textContent = e.type;
+  document.body.appendChild(div);
+
 }
 
 window.addEventListener('touchstart', handler);

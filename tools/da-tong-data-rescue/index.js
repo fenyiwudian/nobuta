@@ -54,49 +54,49 @@ str = `time	ip	cost	key	unionid	大通openid	请打分	 外观	乘坐空间	乘�
 const lines = str.split('\n');
 const head = lines.shift().split('\t');
 const dataList = lines.map(line => {
-    const props = line.split('\t');
-    let select_1 = '';
-    for (let i = 7; i < 12; i++) {
-        if (props[i] == 1) {
-            select_1 += head[i] + ' ';
-        }
+  const props = line.split('\t');
+  let select_1 = '';
+  for (let i = 7; i < 12; i++) {
+    if (props[i] == 1) {
+      select_1 += head[i] + ' ';
     }
+  }
 
-    let select_2 = '';
-    for (let i = 12; i < 16; i++) {
-        if (props[i] == 1) {
-            select_2 += head[i] + ' ';
-        }
+  let select_2 = '';
+  for (let i = 12; i < 16; i++) {
+    if (props[i] == 1) {
+      select_2 += head[i] + ' ';
     }
+  }
 
-    return {
-        time: new Date(props[0]).getTime() - props[2] * 1000,
-        key: props[3],
-        unionId: props[4],
-        openId: props[5],
-        mark_1: props[6],
-        select_1: select_1.trim(),
-        select_2: select_2.trim(),
-        select_3: props[15],
-        mark_2: props[16],
-        select_4: props[20],
-        mix: `${props[17]} ${props[18]} ${props[19]}`
-    }
+  return {
+    time: new Date(props[0]).getTime() - props[2] * 1000,
+    key: props[3],
+    unionId: props[4],
+    openId: props[5],
+    mark_1: props[6],
+    select_1: select_1.trim(),
+    select_2: select_2.trim(),
+    select_3: props[15],
+    mark_2: props[16],
+    select_4: props[20],
+    mix: `${props[17]} ${props[18]} ${props[19]}`
+  }
 });
 
 const urlTpl = 'https://editor.cform.io/plugin/da_tong_01.html?scenseId=${key}&openId=${openId}&unionId=${unionId}&answerTime=${time}&answer1=${mark_1}&answer2=${select_1}&answer3=${select_2}&answer4=${select_3}&answer5=${select_4}&answer6=${mark_2}&answer7=${mix}'
 
 
 const urlList = dataList.map(data => {
-    let url = urlTpl;
-    Object.keys(data).forEach(key => {
-        url = url.replace('${' + key + '}', encodeURIComponent(data[key]));
-    })
-    return url;
+  let url = urlTpl;
+  Object.keys(data).forEach(key => {
+    url = url.replace('${' + key + '}', encodeURIComponent(data[key]));
+  })
+  return url;
 })
 
-const listHtml = urlList.reduce((html,url,index) =>{
-    return html + `<li><a href="${url}">${dataList[index].mix}  ${dataList[index].key}</a></li>`;
+const listHtml = urlList.reduce((html, url, index) => {
+  return html + `<li><a href="${url}">${dataList[index].mix}  ${dataList[index].key}</a></li>`;
 }, '');
 
 const html = `<ul>${listHtml}</ul>`;

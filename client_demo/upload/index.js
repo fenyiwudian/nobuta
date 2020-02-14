@@ -1,7 +1,7 @@
-var express =   require("express");
-var multer  =   require('multer');
-var app         =   express();
-var storage =   multer.diskStorage({
+var express = require("express");
+var multer = require('multer');
+var app = express();
+var storage = multer.diskStorage({
   destination: function (req, file, callback) {
     callback(null, './uploads');
   },
@@ -9,21 +9,21 @@ var storage =   multer.diskStorage({
     callback(null, file.fieldname + '-' + Date.now());
   }
 });
-var upload = multer({ storage : storage}).single('userPhoto');
+var upload = multer({ storage: storage }).single('userPhoto');
 
-app.get('/',function(req,res){
-      res.sendFile(__dirname + "/index.html");
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + "/index.html");
 });
 
-app.post('/api/photo',function(req,res){
-    upload(req,res,function(err) {
-        if(err) {
-            return res.end("Error uploading file.");
-        }
-        res.end("File is uploaded");
-    });
+app.post('/api/photo', function (req, res) {
+  upload(req, res, function (err) {
+    if (err) {
+      return res.end("Error uploading file.");
+    }
+    res.end("File is uploaded");
+  });
 });
 
-app.listen(12345,function(){
-    console.log("Working on port 12345");
+app.listen(12345, function () {
+  console.log("Working on port 12345");
 });

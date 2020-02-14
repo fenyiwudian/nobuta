@@ -2,43 +2,43 @@
 <html lang="en">
 
 <head>
-    <title></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-    <div contenteditable="true" id='rich-input' style='width:100%;height: 200px;'>
+  <div contenteditable="true" id='rich-input' style='width:100%;height: 200px;'>
 
-    </div>
-    <script>
-        var elem = document.getElementById('rich-input');
-        elem.addEventListener('paste', function (e) {
-            // 如果是富文本,我们要禁止默认行为
-            if (e.clipboardData.getData('text/html')) {
-                e.preventDefault();
-                // 使用纯文本
-                var text = e.clipboardData.getData('text/plain');
-                var sel = window.getSelection();
-                var range = sel.getRangeAt(0);
-                // 删除当前选中的内容
-                range.deleteContents();
-                // 将纯文本加入到光标位置
-                var frag = document.createTextNode(text)
-                range.insertNode(frag);
+  </div>
+  <script>
+    var elem = document.getElementById('rich-input');
+    elem.addEventListener('paste', function (e) {
+      // 如果是富文本,我们要禁止默认行为
+      if (e.clipboardData.getData('text/html')) {
+        e.preventDefault();
+        // 使用纯文本
+        var text = e.clipboardData.getData('text/plain');
+        var sel = window.getSelection();
+        var range = sel.getRangeAt(0);
+        // 删除当前选中的内容
+        range.deleteContents();
+        // 将纯文本加入到光标位置
+        var frag = document.createTextNode(text)
+        range.insertNode(frag);
 
-                // 光标移动到加入文本的末尾
-                // 一定要将当前选择的所有range移除掉,重新开一个range设置光标位置
-                // 如果使用当前range来设置光标位置,不会生效
-                sel.removeAllRanges();
-                var newRange = document.createRange();
-                newRange.setStartAfter(frag);
-                newRange.setEndAfter(frag);
-                sel.addRange(newRange);
-            }
-            // 如果是纯文本,则使用默认行为
-        })
-    </script>
+        // 光标移动到加入文本的末尾
+        // 一定要将当前选择的所有range移除掉,重新开一个range设置光标位置
+        // 如果使用当前range来设置光标位置,不会生效
+        sel.removeAllRanges();
+        var newRange = document.createRange();
+        newRange.setStartAfter(frag);
+        newRange.setEndAfter(frag);
+        sel.addRange(newRange);
+      }
+      // 如果是纯文本,则使用默认行为
+    })
+  </script>
 </body>
 
 </html>

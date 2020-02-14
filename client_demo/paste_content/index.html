@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-    <textarea id="textarea" rows="" cols=""></textarea>
-    <div contenteditable="true" style="width:500px; height: 100px;">
-        
-    </div>
-    <script>
-        var a = []
-        window.addEventListener('paste', function(e){
-            var text = e.clipboardData.getData('text/plain')
-            console.log(e.target, text);
-            a.push(text);
-        })
-    </script>
-    </body>
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <textarea id="textarea" rows="" cols=""></textarea>
+  <div contenteditable="true" style="width:500px; height: 100px;">
+
+  </div>
+  <script>
+    var a = []
+    window.addEventListener('paste', function (e) {
+      var text = e.clipboardData.getData('text/plain')
+      console.log(e.target, text);
+      a.push(text);
+    })
+  </script>
+</body>
+
 </html>

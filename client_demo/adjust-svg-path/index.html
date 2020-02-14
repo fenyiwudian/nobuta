@@ -2,37 +2,36 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        #assist-lines path {
-            cursor: copy;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #assist-lines path {
+      cursor: copy;
+    }
 
-        #assist-points rect {
-            cursor: move;
-            stroke: black;
-            stroke-width: 1px;
-            fill: white;
-        }
-
-    </style>
+    #assist-points rect {
+      cursor: move;
+      stroke: black;
+      stroke-width: 1px;
+      fill: white;
+    }
+  </style>
 </head>
 
 <body>
-    <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1'
-        style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;;'>
-        <g id='container' transform='translate(0, 0)'>
-            <path id='my-path' d="M100 100 L100 200 L200 200 L200 100 Z" stroke='red' stroke-width='2'
-                fill='rgba(255, 55, 88, 0.5)'></path>
-            <g id='assist-lines'></g>
-            <g id='assist-points'></g>
-        </g>
+  <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1'
+    style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;;'>
+    <g id='container' transform='translate(0, 0)'>
+      <path id='my-path' d="M100 100 L100 200 L200 200 L200 100 Z" stroke='red' stroke-width='2'
+        fill='rgba(255, 55, 88, 0.5)'></path>
+      <g id='assist-lines'></g>
+      <g id='assist-points'></g>
+    </g>
 
-    </svg>
-    <script src="./index.js"></script>
+  </svg>
+  <script src="./index.js"></script>
 </body>
 
 </html>
