@@ -48,7 +48,7 @@ str = `time	ip	cost	key	unionid	大通openid	请打分	 外观	乘坐空间	乘�
 2017-10-12 18:48:56	61.*.*.118	174	a010667	owkvfsiKGeB7va-dQAlwtq23l1bM	oAgNVwomaG6Jhi8BXejwSYMNR0W4	4	1	1	0	0	1	0	0	0	需要进一步考虑	5	王路	15945414351	黑龙江省-佳木斯市-桦川县	10-15万
 2017-10-12 18:48:19	14.*.*.112	40	a010667	owkvfspF7rSrZE3eRvB5mwIMQQRg	oAgNVwgg8_WesnOtCz49o2wC75Ic	5	1	0	0	0	0	1	0	0	不会	5	陈颖	17194938355	广东省-湛江市	
 2017-10-12 18:48:17	116.*.*.165	46	a006972	owkvfsr4ynx9A8JgmC4ecemc52LM	oAgNVwtGmrKz6SwtWAVEr9x5-luc	5	0	1	1	0	0	0	1	1	需要进一步考虑	5	胡子	13216932347	辽宁省-大连市-西岗区	25万以上
-2017-10-12 18:45:48	14.*.*.112	38	a010667	owkvfsijO4C9tDpHXqbCzhITjD1k	oAgNVwjWiPdWvF9wxDlkAXRxMDxs	5	0	1	0	0	0	1	0	0	需要进一步考虑	5	杨桃	17185249837	广东省-湛江市	15-20万`
+2017-10-12 18:45:48	14.*.*.112	38	a010667	owkvfsijO4C9tDpHXqbCzhITjD1k	oAgNVwjWiPdWvF9wxDlkAXRxMDxs	5	0	1	0	0	0	1	0	0	需要进一步考虑	5	杨桃	17185249837	广东省-湛江市	15-20万`;
 
 
 const lines = str.split('\n');
@@ -81,19 +81,19 @@ const dataList = lines.map(line => {
     mark_2: props[16],
     select_4: props[20],
     mix: `${props[17]} ${props[18]} ${props[19]}`
-  }
+  };
 });
 
-const urlTpl = 'https://editor.cform.io/plugin/da_tong_01.html?scenseId=${key}&openId=${openId}&unionId=${unionId}&answerTime=${time}&answer1=${mark_1}&answer2=${select_1}&answer3=${select_2}&answer4=${select_3}&answer5=${select_4}&answer6=${mark_2}&answer7=${mix}'
+const urlTpl = 'https://editor.cform.io/plugin/da_tong_01.html?scenseId=${key}&openId=${openId}&unionId=${unionId}&answerTime=${time}&answer1=${mark_1}&answer2=${select_1}&answer3=${select_2}&answer4=${select_3}&answer5=${select_4}&answer6=${mark_2}&answer7=${mix}';
 
 
 const urlList = dataList.map(data => {
   let url = urlTpl;
   Object.keys(data).forEach(key => {
     url = url.replace('${' + key + '}', encodeURIComponent(data[key]));
-  })
+  });
   return url;
-})
+});
 
 const listHtml = urlList.reduce((html, url, index) => {
   return html + `<li><a href="${url}">${dataList[index].mix}  ${dataList[index].key}</a></li>`;

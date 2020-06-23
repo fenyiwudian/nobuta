@@ -1,4 +1,5 @@
-import nodeStreamZip = require('node-stream-zip');
+// @ts-nocheck
+import nodeStreamZip = require('./node_modules/node-stream-zip');
 import fs = require('fs');
 
 // 流程原理参照：https://www.npmjs.com/package/node-stream-zip

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 var http = require('http');
 
 
@@ -20,6 +21,7 @@ const requestSync_2 = () => {
   });
 };
 
+// eslint-disable-next-line no-unused-vars
 const reqeustSync_1 = () => {
   return new Promise(resolve => {
     const req = http.request({
@@ -72,6 +74,7 @@ const fn1 = () => {
 const fn2 = () => {
   return new Promise(resolve => {
     setTimeout(function () {
+      // eslint-disable-next-line no-undef
       a = b;
       resolve();
     }, 100);

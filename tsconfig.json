@@ -14,7 +14,7 @@
     ]
   },
   "include": [
-    "node_demos/**/*.ts",
+    "backup/node_demos/**/*.ts",
     "types/**/*.ts"
   ]
 }
