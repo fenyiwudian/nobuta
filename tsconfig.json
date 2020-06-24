@@ -1,19 +1,20 @@
 {
-  "compilerOptions": {
+ "compilerOptions": {
     "outDir": "./build/",
     "noImplicitAny": true,
     "noImplicitThis": true,
     "noImplicitReturns": true,
-    "module": "es6",
+    "module": "es2015",
     "target": "es2017",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true,
+    "sourceMap": true,
     "lib": [
       "es2017",
-      "dom"
-    ],
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
+      "dom",
+      "dom.iterable"
+    ]
   },
   "include": [
     "src/**/*.ts",

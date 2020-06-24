@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "typedoc": "node_modules/.bin/typedoc --out docs/./src/ts/index.ts"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   },
   "homepage": "https://github.com/fenyiwudian/nobuta#readme",
   "devDependencies": {
+    "@paztis/typedoc": "^0.1.6",
     "clean-webpack-plugin": "^3.0.0",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.5",

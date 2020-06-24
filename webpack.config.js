@@ -11,7 +11,9 @@ function getEntry(dir) {
     if (stat.isDirectory()) {
       result = { ...result, ...getEntry(filePath) };
     } else if (filePath.endsWith('.ts')) {
-      result[filePath.replace(/\.ts$/, '')] = filePath;
+      const entryName = filePath.replace(/\.ts$/, '')
+        .replace(/^\.src\//);
+      result[entryName] = filePath;
     }
   });
   return result;
