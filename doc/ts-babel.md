@@ -9,4 +9,8 @@
       minimize: false
     }
 ```
-+ 构建后可以发现typescript直接构建后只会把ts代码转成等同的
++ 构建后可以发现typescript直接构建后只会把ts代码转成等同的js代码,在低级的浏览器上是无法运行的.
+
++ 尝试增加babel-loader来将高级代码转成低级代码
+
++

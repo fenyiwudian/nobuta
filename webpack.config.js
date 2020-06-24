@@ -1,3 +1,4 @@
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const path = require('path');
 const fs = require('fs');
 
@@ -8,9 +9,9 @@ function getEntry(dir) {
     const filePath = dir + '/' + file;
     const stat = fs.statSync(filePath);
     if (stat.isDirectory()) {
-      result = { ...getEntry(filePath) };
+      result = { ...result, ...getEntry(filePath) };
     } else if (filePath.endsWith('.ts')) {
-      result[filePath.replace(/\.ts$/)] = filePath;
+      result[filePath.replace(/\.ts$/, '')] = filePath;
     }
   });
   return result;
@@ -19,7 +20,7 @@ function getEntry(dir) {
 
 module.exports = () => {
   return {
-    entry: getEntry(),
+    entry: getEntry('./src'),
     output: {
       filename: '[name].js',
       path: path.resolve('./dist')
@@ -34,6 +35,9 @@ module.exports = () => {
     },
     optimization: {
       minimize: false
-    }
+    },
+    plugins: [
+      new CleanWebpackPlugin()
+    ]
   };
 };
