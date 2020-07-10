@@ -19,10 +19,12 @@ function getEntry(dir) {
   return result;
 }
 
-
 module.exports = () => {
   return {
-    entry: getEntry('./src'),
+    entry: {
+      ...getEntry('./src/es'),
+      ts: './src/ts/index.ts'
+    },
     output: {
       filename: '[name].js',
       path: path.resolve('./dist')
@@ -40,6 +42,9 @@ module.exports = () => {
     },
     plugins: [
       new CleanWebpackPlugin()
-    ]
+    ],
+    resolve: {
+      extensions: [".ts", ".js"],
+    },
   };
 };

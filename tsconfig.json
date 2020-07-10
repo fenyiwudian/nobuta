@@ -6,7 +6,6 @@
     "noImplicitReturns": true,
     "module": "es2015",
     "target": "es2017",
-    "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true,
     "sourceMap": true,
