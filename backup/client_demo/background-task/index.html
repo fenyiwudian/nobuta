@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Background Task</title>
+</head>
+<style>
+  @keyframes anim {
+    from {
+      width: 300px;
+      height: 300px;
+      border-radius: 0;
+      background: pink;
+    }
+
+    to {
+      width: 600px;
+      height: 200px;
+      border-radius: 100px;
+      background: green;
+    }
+  }
+
+  #anim {
+    animation-name: anim;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+</style>
+
+<body>
+  <div id='anim'></div>
+  <script src='./index.js'></script>
+</body>
+
+</html>
