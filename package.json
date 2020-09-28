@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=production",
-    "typedoc": "node_modules/.bin/typedoc --out docs/./src/ts/index.ts"
+    "typedoc": "node_modules/.bin/typedoc --out docs/./src/ts/index.ts",
+    "start": "webpack-dev-server --env.NODE_ENV=local --mode=development"
   },
   "repository": {
     "type": "git",
@@ -37,5 +38,9 @@
     "typescript": "^3.9.6",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^4.5.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }
