@@ -1,24 +1,24 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-// const fs = require('fs');
+const fs = require('fs');
 
-// function getEntry(dir) {
-//   let result = {};
-//   const fileList = fs.readdirSync(dir);
-//   fileList.forEach(file => {
-//     const filePath = dir + '/' + file;
-//     const stat = fs.statSync(filePath);
-//     if (stat.isDirectory()) {
-//       result = { ...result, ...getEntry(filePath) };
-//     } else if (filePath.endsWith('.ts')) {
-//       const entryName = filePath.replace(/\.ts$/, '')
-//         .replace(/^\.src\//);
-//       result[entryName] = filePath;
-//     }
-//   });
-//   return result;
-// }
+function getEntry(dir) {
+  let result = {};
+  const fileList = fs.readdirSync(dir);
+  fileList.forEach(file => {
+    const filePath = dir + '/' + file;
+    const stat = fs.statSync(filePath);
+    if (stat.isDirectory()) {
+      result = { ...result, ...getEntry(filePath) };
+    } else if (filePath.endsWith('.ts')) {
+      const entryName = filePath.replace(/\.ts$/, '')
+        .replace(/^\.src\//);
+      result[entryName] = filePath;
+    }
+  });
+  return result;
+}
 
 module.exports = () => {
   return {
@@ -32,9 +32,9 @@ module.exports = () => {
       hot: true,
     },
     entry: {
-      // ...getEntry('./src/es'),
+      ...getEntry('./src/lab'),
       // ts: './src/ts/index.ts',
-      lab: './src/lab/index.ts',
+      // lab: './src/lab/index.ts',
       // index: './src/index.ts'
     },
     output: {
@@ -56,10 +56,10 @@ module.exports = () => {
       minimize: false
     },
     plugins: [
-      // new HtmlWebpackPlugin({
-      //   template: './src/index.html',
-      //   filename: 'index.html',
-      // }),
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+        filename: 'index.html',
+      }),
       new CleanWebpackPlugin()
     ],
     resolve: {
