@@ -1,5 +1,5 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 // const fs = require('fs');
 
@@ -34,8 +34,8 @@ module.exports = () => {
     entry: {
       // ...getEntry('./src/es'),
       // ts: './src/ts/index.ts',
-      // lab: './src/lab/index.ts',
-      index: './src/index.ts'
+      lab: './src/lab/index.ts',
+      // index: './src/index.ts'
     },
     output: {
       filename: '[name].js',
@@ -46,7 +46,7 @@ module.exports = () => {
         {
           test: /\.ts$/,
           use: [
-            // {loader:'babel-loader'},
+            { loader: 'babel-loader' },
             { loader: 'ts-loader' }
           ]
         }
@@ -56,10 +56,10 @@ module.exports = () => {
       minimize: false
     },
     plugins: [
-      new HtmlWebpackPlugin({
-        template: './src/index.html',
-        filename: 'index.html',
-      }),
+      // new HtmlWebpackPlugin({
+      //   template: './src/index.html',
+      //   filename: 'index.html',
+      // }),
       new CleanWebpackPlugin()
     ],
     resolve: {
