@@ -53,6 +53,7 @@
 2. `typescript`根据其[设计理念和目标](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Design-Goals#non-goals)来看，仅仅应把其当成一个类型检查工具，而不是代码处理工具（当然ts转es这一步处理是不可避免的，这是他的本职工作，但是额外的es兼容代码转换就不应该依赖它，虽然它仍然会更具target来转换es高级语法）。
 3. 综上两点，还是需要使用到babel作为转换工具。
 
+
 ### 对于npm包的发布
 以os-client-core为例，建议发两个版本的包，一个是做好了降成了es5的包，一个是未降成es5的包，这两个各有优缺点和适用场景。
 
@@ -60,5 +61,10 @@
 
 未降成es5的包：不可以直接使用，需要使用打包器重新降es5处理，不过通过[@babel/plugin-transform-runtime](https://babeljs.io/docs/en/babel-plugin-transform-runtime)可以使得依赖包和主项目共用es5降级注入代码，减少总bundle的尺寸大小。
 
+对于os-client-live这个动态组件分离发布的构建方式。
+
+尽管使用runtime可以减少代码注入，但是webpack分入口的时候，仍然会在各个入口中重新注入代码，这样的话就会导致多个入口中包含了同样的注入代码。
+
+这种情况下，还是选择在主入口中手动导入polyfill为妙，但是plugin的生成代码仍然会重复堆积。
 
 
