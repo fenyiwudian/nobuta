@@ -16,5 +16,12 @@
       }
     ]
   ],
-  "plugins": ["@babel/plugin-transform-runtime"]
+  "plugins": [
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "version": "7.12.1"
+      }
+    ]
+  ]
 }

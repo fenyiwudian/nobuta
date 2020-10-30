@@ -1,3 +1,5 @@
-export default async function (a: string) {
-  return a.includes('bbbb');
+export default function () {
+  return ''.startsWith('bbbb');
 }
+
+console.log('1114'.startsWith('1114'));
