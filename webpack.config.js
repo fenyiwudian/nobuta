@@ -33,6 +33,7 @@ module.exports = () => {
     },
     entry: {
       ...getEntry('./src/lab'),
+      combine: './src/babel-runtime/index.ts'
       // ts: './src/ts/index.ts',
       // lab: './src/lab/index.ts',
       // index: './src/index.ts'
@@ -53,19 +54,19 @@ module.exports = () => {
       ]
     },
     optimization: {
-      // minimize: false,
-      runtimeChunk: "single",
-      splitChunks: {
-        // 将babel的附加辅助代码同一打包到一个地方，避免多个入口重复引入这些代码
-        cacheGroups: {
-          babel: {
-            chunks: "all",
-            name: "babel",
-            test: /node_modules[\\/](@babel|core-js|regenerator-runtime[\\/]runtime)/,
-            enforce: true,
-          },
-        }
-      }
+      minimize: false,
+      // runtimeChunk: "single",
+      // splitChunks: {
+      //   // 将babel的附加辅助代码同一打包到一个地方，避免多个入口重复引入这些代码
+      //   cacheGroups: {
+      //     babel: {
+      //       chunks: "all",
+      //       name: "babel",
+      //       test: /node_modules[\\/](@babel|core-js|regenerator-runtime[\\/]runtime)/,
+      //       enforce: true,
+      //     },
+      //   }
+      // }
     },
     plugins: [
       new HtmlWebpackPlugin({
