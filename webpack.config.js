@@ -58,9 +58,9 @@ module.exports = () => {
       splitChunks: {
         // 将babel的附加辅助代码同一打包到一个地方，避免多个入口重复引入这些代码
         cacheGroups: {
-          react: {
+          babel: {
             chunks: "all",
-            name: "babel-assist",
+            name: "babel",
             test: /node_modules[\\/](@babel|core-js|regenerator-runtime[\\/]runtime)/,
             enforce: true,
           },

@@ -6,8 +6,8 @@
         "targets": {
           "ie": "10"
         },
-        "bugfixes": true,
-        "debug": true,
+        // "bugfixes": true,
+        // "debug": true,
         "useBuiltIns": "usage",
         "corejs": {
           "version": 3,
