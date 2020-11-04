@@ -1,4 +1,3 @@
-// @ts-ignore
-import { Core } from 'demo-module';
-console.log(Core);
+import * as A from 'demo-module';
+console.log(A);
 console.log('ddd'.endsWith('d'))
