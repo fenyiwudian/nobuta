@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: rgba(0, 0, 0, .5);
+    }
+  </style>
+</head>
+
+<body>
+  <div style='background:red;height: 100px; width: 100%;'></div>
+  <div style='background:green; width: 100%;display: flex; justify-content: space-around;'>
+    <div style='background:yellow; height: 400px; width: 400px;'></div>
+    <div style='background:orange;height: 400px; width: 400px;position: relative;'>
+      <div id='mask'></div>
+    </div>
+    <div style='background:purple; height: 400px; width: 400px;'></div>
+  </div>
+  <div style='background:blue;height: 100px; width: 100%;'></div>
+</body>
+
+</html>
