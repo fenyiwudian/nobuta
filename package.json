@@ -7,6 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
+    "work": " tsc backup/node_demos/bts2020h2-statistics.ts --outDir backup/local-data/ && node backup/local-data/bts2020h2-statistics.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=production",
     "typedoc": "node_modules/.bin/typedoc --out docs/./src/ts/index.ts",
