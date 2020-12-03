@@ -41,7 +41,7 @@ async function asyncCatch(id) {
   console.log('async catch finally are normal codes after try/catch so obviously always be executed');
 }
 
-async function asyncChainError(){
+async function asyncChainError() {
   try {
     const data = await getData(34);
     console.log('async catch get data success:' + data);
@@ -52,13 +52,41 @@ async function asyncChainError(){
   }
 }
 
-function main() {
+
+
+function syncAdd(a, b) {
+  return a + b;
+}
+
+async function asyncAdd(a, b) {
+  return a + b;
+}
+
+
+async function main() {
   promiseCatch(1);
   promiseCatch(-1);
   asyncCatch(1);
   asyncCatch(-1);
   promiseChainErr();
   asyncChainError();
+  const times = 100000;
+  const syncStart = Date.now();
+  let syncResult = 0;
+  for (let i = 0; i < times; i++) {
+    const syncPart = syncAdd(i, i + 1);
+    syncResult += syncPart;
+  }
+  console.log(`sync tasks with times: ${times} result:${syncResult} cost time:${Date.now() - syncStart}`);
+
+  const asyncStart = Date.now();
+  let asyncResult = 0;
+  for (let i = 0; i < times; i++) {
+    const asyncPart = await asyncAdd(i, i + 1);
+    asyncResult += asyncPart;
+  }
+  console.log(`async tasks with times: ${times} result:${asyncResult} cost time:${Date.now() - asyncStart}`);
 }
 
 main();
+
