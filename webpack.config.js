@@ -32,8 +32,9 @@ module.exports = () => {
       hot: true,
     },
     entry: {
-      ...getEntry('./src/lab'),
-      combine: './src/babel-runtime/index.ts'
+      // ...getEntry('./src/lab'),
+      // combine: './src/babel-runtime/index.ts'
+      async_await: './src/lab/async-await.ts'
       // ts: './src/ts/index.ts',
       // lab: './src/lab/index.ts',
       // index: './src/index.ts'
