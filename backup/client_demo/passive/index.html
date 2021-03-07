@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+<body>
+  <ol>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ol>
+  <script>
+    /**
+     * 这个方法会执行很久
+     */ 
+    function loop(){
+      const start = Date.now();
+      const arr = [];
+      for(let i = 0; i < 100000000; i++){
+        arr.push(i);
+      }
+      console.log(Date.now() - start, arr.length);
+    }
+    // 按照标准，默认passive是false，想要启用的时候需要显式指明true
+    // 但是有些浏览器实现时认为根据统计得出绝大部分情况下都是true，所以默认值改成了true，要关闭时显式指明false
+    // 用wheel做实例，
+
+    // 情况一：使用默认值true
+    window.addEventListener('wheel', function(e){
+      // 这里调用调用一个耗时很久的操作，核心线程会卡在这里
+      loop();
+      // 因为passive为true,会：
+      // 1. 绘制合成进程不会等待核心线程，会直接开始更新，所以UI不会被卡住。
+      // 2. 阻止默认行为不会生效，而是会在控制台排除警告或错误。
+      e.preventDefault();
+    })
+    
+
+    // // 情况二：使用false
+    // window.addEventListener('wheel', function(e){
+    //   // 这里调用调用一个耗时很久的操作，核心线程会卡在这里
+    //   loop();
+    //   // 因为passive为false,会：
+    //   // 1. 不确定是否会调用组织默认行为的方法，所以绘制合成进程要等核心进程执行才能执行，UI也会卡住。
+    // }, {passive: false})
+  </script>
+</body>
+</html>
