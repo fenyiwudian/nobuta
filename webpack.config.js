@@ -1,24 +1,24 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const fs = require('fs');
+// const fs = require('fs');
 
-function getEntry(dir) {
-  let result = {};
-  const fileList = fs.readdirSync(dir);
-  fileList.forEach(file => {
-    const filePath = dir + '/' + file;
-    const stat = fs.statSync(filePath);
-    if (stat.isDirectory()) {
-      result = { ...result, ...getEntry(filePath) };
-    } else if (filePath.endsWith('.ts')) {
-      const entryName = filePath.replace(/\.ts$/, '')
-        .replace(/^\.src\//);
-      result[entryName] = filePath;
-    }
-  });
-  return result;
-}
+// function getEntry(dir) {
+//   let result = {};
+//   const fileList = fs.readdirSync(dir);
+//   fileList.forEach(file => {
+//     const filePath = dir + '/' + file;
+//     const stat = fs.statSync(filePath);
+//     if (stat.isDirectory()) {
+//       result = { ...result, ...getEntry(filePath) };
+//     } else if (filePath.endsWith('.ts')) {
+//       const entryName = filePath.replace(/\.ts$/, '')
+//         .replace(/^\.src\//);
+//       result[entryName] = filePath;
+//     }
+//   });
+//   return result;
+// }
 
 module.exports = () => {
   return {
@@ -34,10 +34,10 @@ module.exports = () => {
     entry: {
       // ...getEntry('./src/lab'),
       // combine: './src/babel-runtime/index.ts'
-      async_await: './src/lab/async-await.ts'
+      // async_await: './src/lab/async-await.ts'
       // ts: './src/ts/index.ts',
       // lab: './src/lab/index.ts',
-      // index: './src/index.ts'
+      index: './src/index.ts'
     },
     output: {
       filename: '[name].js',
@@ -50,6 +50,12 @@ module.exports = () => {
           use: [
             { loader: 'babel-loader' },
             { loader: 'ts-loader' }
+          ]
+        },{
+          include: /node_modules/,
+          test: /\.js$/,
+          use: [
+            { loader: 'babel-loader' },
           ]
         }
       ]
